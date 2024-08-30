@@ -1,181 +1,150 @@
-/* Reset básico e estilos gerais */
-body {
-    font-family: Arial, sans-serif;
+/* Reset básico de estilos */
+* {
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4; /* Cor de fundo suave */
+    box-sizing: border-box;
 }
 
-/* Estilos para o cabeçalho */
+/* Estilos gerais */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
 header {
-    background: #003366; /* Azul Marinho */
+    background-color: #0033a0; /* Azul marinho */
     color: #fff;
-    padding: 15px 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-header .container {
+    padding: 15px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-header .logo img {
-    max-width: 50px; /* Tamanho da logo */
-    height: auto;
-    display: block;
+header .logo {
+    width: 50px;
 }
 
 nav ul {
     list-style: none;
-    margin: 0;
-    padding: 0;
     display: flex;
+    gap: 20px;
 }
 
 nav ul li {
-    margin-left: 20px;
+    display: inline;
 }
 
 nav ul li a {
     color: #fff;
     text-decoration: none;
     font-weight: bold;
-    padding: 5px 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    transition: color 0.3s, text-shadow 0.3s;
 }
 
 nav ul li a:hover {
-    background-color: #0099ff; /* Neon */
+    color: #00ff00; /* Neon verde */
+    text-shadow: 0 0 5px #00ff00;
 }
 
-/* Estilos para o conteúdo principal */
 main {
     padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
-/* Estilos para a seção de produtos */
-.products {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-}
-
-.product-item {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.product-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-}
-
-.product-item img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 15px;
-}
-
-.product-item h3 {
-    margin: 0 0 10px;
-    color: #003366; /* Azul Marinho */
-}
-
-.product-item p {
-    margin: 10px 0;
-}
-
-.product-item .price {
-    font-size: 1.2em;
-    color: #003366; /* Azul Marinho */
-    margin: 10px 0;
-}
-
-.product-item a {
-    display: inline-block;
-    background-color: #003366; /* Azul Marinho */
+footer {
+    background-color: #0033a0; /* Azul marinho */
     color: #fff;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    text-align: center;
+    padding: 10px;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.product-item a:hover {
-    background-color: #0099ff; /* Neon */
-}
-
-/* Estilos para a página de detalhes do produto */
-.product-details {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
+/* Estilos para produtos */
+.product {
     background: #fff;
     border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.product-details-content {
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px 0;
     display: flex;
-    flex-direction: row;
-    gap: 20px;
+    justify-content: space-between;
     align-items: flex-start;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.product-image img {
-    max-width: 400px; /* Ajustar tamanho da imagem */
+.product img {
+    max-width: 150px;
     height: auto;
-    border-radius: 10px;
+    border-radius: 8px;
 }
 
 .product-info {
     flex: 1;
+    margin-left: 20px;
+}
+
+.product-info h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
 }
 
 .product-info p {
-    margin: 10px 0;
+    margin: 5px 0;
 }
 
-.product-info .price {
-    font-size: 1.5em;
-    color: #003366; /* Azul Marinho */
-    margin: 15px 0;
-}
-
-.buy-button {
-    display: inline-block;
-    background-color: #003366; /* Azul Marinho */
-    color: #fff;
+.product a {
+    color: #007bff; /* Azul */
     text-decoration: none;
-    padding: 15px 25px;
-    border-radius: 5px;
-    text-align: center;
     font-weight: bold;
-    transition: background-color 0.3s ease;
+    transition: color 0.3s;
 }
 
-.buy-button:hover {
-    background-color: #0099ff; /* Neon */
+.product a:hover {
+    color: #0056b3; /* Azul escuro */
 }
 
-/* Estilos para o rodapé */
-footer {
-    background: #003366; /* Azul Marinho */
+/* Estilos para detalhes do produto */
+.product-details {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+.product-details .product-image {
+    flex: 1;
+}
+
+.product-details .product-image img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+.details {
+    flex: 2;
+}
+
+.details h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.details p {
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+.details button {
+    background-color: #007bff; /* Azul */
     color: #fff;
-    padding: 10px 0;
-    text-align: center;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.details button:hover {
+    background-color: #0056b3; /* Azul escuro */
+    transform: scale(1.05);
 }

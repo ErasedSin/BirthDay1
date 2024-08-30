@@ -1,4 +1,12 @@
-window.addEventListener('load', () => {
-    console.log('Domfut - Site carregado com sucesso!');
-    // Você pode adicionar mais funcionalidades aqui
+// Inicialização do Swiper
+const swiper = new Swiper('.swiper-container', {
+    loop: true,
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+    },
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
 });
