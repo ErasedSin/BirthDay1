@@ -10,7 +10,8 @@ body {
 header {
     background: #003366; /* Azul Marinho */
     color: #fff;
-    padding: 10px 0;
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 header .container {
@@ -59,64 +60,115 @@ main {
     margin: 0 auto;
 }
 
-section h1, section h2, section h3 {
-    color: #003366; /* Azul Marinho */
+/* Estilos para a seção de produtos */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
 }
 
-/* Estilos para as seções de produtos e categorias */
-.product-item, .category-item {
+.product-item {
     background: #fff;
     border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 15px;
-    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.product-item img, .category-item img {
+.product-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.product-item img {
     max-width: 100%;
     height: auto;
+    border-radius: 10px;
+    margin-bottom: 15px;
 }
 
-.product-item h3, .category-item h3 {
-    margin: 0;
+.product-item h3 {
+    margin: 0 0 10px;
     color: #003366; /* Azul Marinho */
 }
 
-/* Estilos para o formulário de contato */
-form {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.product-item p {
+    margin: 10px 0;
 }
 
-form label {
-    display: block;
-    margin-bottom: 5px;
+.product-item .price {
+    font-size: 1.2em;
+    color: #003366; /* Azul Marinho */
+    margin: 10px 0;
 }
 
-form input, form textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-form button {
+.product-item a {
+    display: inline-block;
     background-color: #003366; /* Azul Marinho */
     color: #fff;
-    border: none;
-    padding: 10px 15px;
+    text-decoration: none;
+    padding: 10px 20px;
     border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
     transition: background-color 0.3s ease;
 }
 
-form button:hover {
+.product-item a:hover {
+    background-color: #0099ff; /* Neon */
+}
+
+/* Estilos para a página de detalhes do produto */
+.product-details {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-details-content {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.product-image img {
+    max-width: 400px; /* Ajustar tamanho da imagem */
+    height: auto;
+    border-radius: 10px;
+}
+
+.product-info {
+    flex: 1;
+}
+
+.product-info p {
+    margin: 10px 0;
+}
+
+.product-info .price {
+    font-size: 1.5em;
+    color: #003366; /* Azul Marinho */
+    margin: 15px 0;
+}
+
+.buy-button {
+    display: inline-block;
+    background-color: #003366; /* Azul Marinho */
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 25px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.buy-button:hover {
     background-color: #0099ff; /* Neon */
 }
 
