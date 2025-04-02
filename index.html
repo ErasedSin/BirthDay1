@@ -18,6 +18,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
         }
         .video-container {
             position: fixed;
@@ -29,12 +30,28 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
         }
         video {
             width: auto;
             height: 100%;
             max-width: 100vw;
             object-fit: contain;
+        }
+        .birthday-text {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: #ffcc00;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .birthday-text span {
+            display: block;
         }
         .press-start {
             position: absolute;
@@ -53,40 +70,6 @@
             50% { opacity: 0; }
             100% { opacity: 1; }
         }
-        .game-container {
-            display: none;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        .carousel {
-            display: flex;
-            overflow-x: auto;
-            white-space: nowrap;
-            width: 90vw;
-            padding: 10px;
-            gap: 10px;
-        }
-        .game-selection {
-            padding: 10px;
-            cursor: pointer;
-            border: 2px solid white;
-            display: inline-block;
-            transition: transform 0.2s;
-            font-size: 14px;
-        }
-        .game-selection:hover {
-            transform: scale(1.1);
-        }
-        .game-details {
-            display: none;
-            margin-top: 10px;
-            font-size: 14px;
-        }
     </style>
 </head>
 <body>
@@ -95,55 +78,11 @@
             <source src="Smoking Girl from va-11 hall-a.mp4" type="video/mp4">
             Seu navegador não suporta vídeos.
         </video>
+        <h1 class="birthday-text">
+            <span>V</span>
+            <span>18 anos de força, sonhos e um futuro brilhante! 💖</span>
+        </h1>
         <h1 class="press-start">Press Start</h1>
     </div>
-    
-    <div class="game-container">
-        <div class="carousel">
-            <div class="game-selection" onclick="showDetails('jojo')">JoJo’s Bizarre Adventure</div>
-            <div class="game-selection" onclick="showDetails('berserk')">Berserk</div>
-            <div class="game-selection" onclick="showDetails('valkyrie')">Shuumatsu no Valkyrie</div>
-            <div class="game-selection" onclick="showDetails('fight')">Jogo de Luta</div>
-            <div class="game-selection" onclick="showDetails('horror')">Jogo de Terror</div>
-            <div class="game-selection" onclick="showDetails('cyberpunk')">Cyberpunk/Gorillaz</div>
-            <div class="game-selection" onclick="showDetails('abba')">ABBA Energy</div>
-            <div class="game-selection" onclick="showDetails('mystery')">Misterioso/Especial</div>
-        </div>
-        <div class="game-details" id="game-details"></div>
-    </div>
-    
-    <script>
-        document.querySelector('.press-start').addEventListener('click', function() {
-            if (document.documentElement.requestFullscreen) {
-                document.documentElement.requestFullscreen();
-            } else if (document.documentElement.mozRequestFullScreen) {
-                document.documentElement.mozRequestFullScreen();
-            } else if (document.documentElement.webkitRequestFullscreen) {
-                document.documentElement.webkitRequestFullscreen();
-            } else if (document.documentElement.msRequestFullscreen) {
-                document.documentElement.msRequestFullscreen();
-            }
-            
-            document.querySelector('.video-container').style.display = 'none';
-            document.querySelector('.game-container').style.display = 'flex';
-        });
-
-        function showDetails(game) {
-            let details = {
-                'jojo': 'Um jogo cheio de ação, poderes Stand e muita pose! 🎭',
-                'berserk': 'A escuridão e a fúria de Guts aguardam você. ⚔️',
-                'valkyrie': 'Grandes deuses e guerreiros em batalhas épicas! ⚡',
-                'fight': 'Entre no ringue e mostre sua força! 🥊',
-                'horror': 'O medo está sempre à espreita... Você tem coragem? 👁️',
-                'cyberpunk': 'Neon, tecnologia e um toque de rebeldia. 🔥',
-                'abba': 'Dançar, brilhar e aproveitar a música! 🎶',
-                'mystery': 'Algo especial e inesperado está aqui... ✨'
-            };
-            
-            document.getElementById('game-details').innerText = details[game];
-            document.getElementById('game-details').style.display = 'block';
-        }
-    </script>
 </body>
 </html>
-
