@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Birthday Project</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
@@ -13,18 +13,23 @@
             font-family: 'Press Start 2P', cursive;
             margin: 0;
             overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .video-container {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             overflow: hidden;
         }
         video {
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             object-fit: cover;
         }
         .press-start {
@@ -32,7 +37,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 24px;
+            font-size: 20px;
             animation: blink 1s infinite;
             cursor: pointer;
             background: rgba(0, 0, 0, 0.5);
@@ -46,36 +51,43 @@
         }
         .game-container {
             display: none;
+            width: 100vw;
+            height: 100vh;
             overflow: hidden;
-            white-space: nowrap;
-            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
         .carousel {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
+            overflow-x: auto;
+            white-space: nowrap;
+            width: 90vw;
+            padding: 10px;
+            gap: 10px;
         }
         .game-selection {
-            padding: 20px;
+            padding: 10px;
             cursor: pointer;
             border: 2px solid white;
             display: inline-block;
             transition: transform 0.2s;
+            font-size: 14px;
         }
         .game-selection:hover {
             transform: scale(1.1);
         }
         .game-details {
             display: none;
-            margin-top: 20px;
-            font-size: 18px;
+            margin-top: 10px;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
     <div class="video-container">
-        <video autoplay loop muted>
+        <video autoplay loop muted playsinline>
             <source src="Smoking Girl from va-11 hall-a.mp4" type="video/mp4">
             Seu navegador não suporta vídeos.
         </video>
@@ -99,7 +111,7 @@
     <script>
         document.querySelector('.press-start').addEventListener('click', function() {
             document.querySelector('.video-container').style.display = 'none';
-            document.querySelector('.game-container').style.display = 'block';
+            document.querySelector('.game-container').style.display = 'flex';
         });
 
         function showDetails(game) {
