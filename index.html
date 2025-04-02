@@ -18,8 +18,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
         }
+
+        /* Tela Inicial */
         .video-container {
             position: fixed;
             top: 0;
@@ -32,12 +33,14 @@
             align-items: center;
             flex-direction: column;
         }
+
         video {
             width: auto;
             height: 100%;
             max-width: 100vw;
             object-fit: contain;
         }
+
         .press-start {
             position: absolute;
             top: 50%;
@@ -50,6 +53,7 @@
             padding: 10px;
             border-radius: 5px;
         }
+
         @keyframes blink {
             0% { opacity: 1; }
             50% { opacity: 0; }
@@ -68,13 +72,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 20px;
-            opacity: 0;
+            font-size: 24px;
+            text-shadow: 0 0 10px white;
             visibility: hidden;
-            transition: opacity 1s ease-in-out;
+            opacity: 0;
+            transition: opacity 1s;
         }
-        
-        /* Container de Seleção de Jogos */
+
+        /* Tela de Seleção de Jogos */
         .game-container {
             display: none;
             width: 100vw;
@@ -85,6 +90,7 @@
             justify-content: center;
             align-items: center;
         }
+
         .carousel {
             display: flex;
             overflow-x: auto;
@@ -93,6 +99,7 @@
             padding: 10px;
             gap: 10px;
         }
+
         .game-selection {
             padding: 10px;
             cursor: pointer;
@@ -101,9 +108,11 @@
             transition: transform 0.2s;
             font-size: 14px;
         }
+
         .game-selection:hover {
             transform: scale(1.1);
         }
+
         .game-details {
             display: none;
             margin-top: 10px;
@@ -112,6 +121,7 @@
     </style>
 </head>
 <body>
+    <!-- Tela Inicial -->
     <div class="video-container">
         <video autoplay loop muted playsinline>
             <source src="Smoking Girl from va-11 hall-a.mp4" type="video/mp4">
@@ -120,10 +130,10 @@
         <h1 class="press-start">Press Start</h1>
     </div>
 
-    <div class="loading-screen">
-        <p>Carregando...</p>
-    </div>
-    
+    <!-- Tela de Loading -->
+    <div class="loading-screen">Carregando...</div>
+
+    <!-- Tela de Seleção de Jogos -->
     <div class="game-container">
         <div class="carousel">
             <div class="game-selection" onclick="showDetails('jojo')">JoJo’s Bizarre Adventure</div>
@@ -137,10 +147,20 @@
         </div>
         <div class="game-details" id="game-details"></div>
     </div>
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             document.querySelector('.press-start').addEventListener('click', function() {
+                // Mostrar imediatamente a tela de loading
+                let loadingScreen = document.querySelector('.loading-screen');
+                loadingScreen.style.visibility = 'visible';
+                loadingScreen.style.opacity = '1';
+
+                // Esconder a tela inicial logo depois
+                setTimeout(() => {
+                    document.querySelector('.video-container').style.display = 'none';
+                }, 100); // Pequeno delay para evitar piscada estranha
+
                 // Entrar no modo tela cheia
                 if (document.documentElement.requestFullscreen) {
                     document.documentElement.requestFullscreen();
@@ -151,14 +171,6 @@
                 } else if (document.documentElement.msRequestFullscreen) {
                     document.documentElement.msRequestFullscreen();
                 }
-                
-                // Esconder a tela inicial
-                document.querySelector('.video-container').style.display = 'none';
-
-                // Exibir e animar a tela de loading
-                let loadingScreen = document.querySelector('.loading-screen');
-                loadingScreen.style.visibility = 'visible';
-                loadingScreen.style.opacity = '1';
 
                 // Após 3 segundos, esconder a tela de loading e mostrar o menu
                 setTimeout(() => {
@@ -182,11 +194,10 @@
                 'abba': 'Dançar, brilhar e aproveitar a música! 🎶',
                 'mystery': 'Algo especial e inesperado está aqui... ✨'
             };
-            
+
             document.getElementById('game-details').innerText = details[game];
             document.getElementById('game-details').style.display = 'block';
         }
     </script>
 </body>
 </html>
-
