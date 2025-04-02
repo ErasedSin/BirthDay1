@@ -1,39 +1,94 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOM Fut - Página Inicial</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Birthday Project</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            text-align: center;
+            font-family: 'Press Start 2P', cursive;
+        }
+        .press-start {
+            font-size: 24px;
+            animation: blink 1s infinite;
+            cursor: pointer;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .game-container {
+            display: none;
+            overflow: hidden;
+            white-space: nowrap;
+            margin-top: 50px;
+        }
+        .carousel {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        .game-selection {
+            padding: 20px;
+            cursor: pointer;
+            border: 2px solid white;
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+        .game-selection:hover {
+            transform: scale(1.1);
+        }
+        .game-details {
+            display: none;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <img src="images/LOGO-SEM-FUNDO.png" alt="Logo DOM Fut" class="logo">
-        <nav>
-            <ul>
-                <li><a href="index.html">Início</a></li>
-                <li><a href="products.html">Produtos</a></li>
-                <li><a href="categories.html">Categorias</a></li>
-            </ul>
-        </nav>
-    </header>
+    <h1 class="press-start">Press Start</h1>
+    <div class="game-container">
+        <div class="carousel">
+            <div class="game-selection" onclick="showDetails('jojo')">JoJo’s Bizarre Adventure</div>
+            <div class="game-selection" onclick="showDetails('berserk')">Berserk</div>
+            <div class="game-selection" onclick="showDetails('valkyrie')">Shuumatsu no Valkyrie</div>
+            <div class="game-selection" onclick="showDetails('fight')">Jogo de Luta</div>
+            <div class="game-selection" onclick="showDetails('horror')">Jogo de Terror</div>
+            <div class="game-selection" onclick="showDetails('cyberpunk')">Cyberpunk/Gorillaz</div>
+            <div class="game-selection" onclick="showDetails('abba')">ABBA Energy</div>
+            <div class="game-selection" onclick="showDetails('mystery')">Misterioso/Especial</div>
+        </div>
+        <div class="game-details" id="game-details"></div>
+    </div>
     
-    <main>
-        <h1>Bem-vindo ao DOM Fut</h1>
-        <section class="products">
-            <div class="product">
-                <img src="images/Flamengo.webp" alt="Camisa Flamengo">
-                <div class="product-info">
-                    <h2>Camisa Flamengo I 24/25</h2>
-                    <a href="product-details.html?id=flamengo">Ver detalhes</a>
-                </div>
-            </div>
-            <!-- Adicione mais produtos aqui -->
-        </section>
-    </main>
-    
-    <footer>
-        <p>&copy; 2024 DOM Fut. Todos os direitos reservados.</p>
-    </footer>
+    <script>
+        document.querySelector('.press-start').addEventListener('click', function() {
+            this.style.display = 'none';
+            document.querySelector('.game-container').style.display = 'block';
+        });
+
+        function showDetails(game) {
+            let details = {
+                'jojo': 'Um jogo cheio de ação, poderes Stand e muita pose! 🎭',
+                'berserk': 'A escuridão e a fúria de Guts aguardam você. ⚔️',
+                'valkyrie': 'Grandes deuses e guerreiros em batalhas épicas! ⚡',
+                'fight': 'Entre no ringue e mostre sua força! 🥊',
+                'horror': 'O medo está sempre à espreita... Você tem coragem? 👁️',
+                'cyberpunk': 'Neon, tecnologia e um toque de rebeldia. 🔥',
+                'abba': 'Dançar, brilhar e aproveitar a música! 🎶',
+                'mystery': 'Algo especial e inesperado está aqui... ✨'
+            };
+            
+            document.getElementById('game-details').innerText = details[game];
+            document.getElementById('game-details').style.display = 'block';
+        }
+    </script>
 </body>
 </html>
+
