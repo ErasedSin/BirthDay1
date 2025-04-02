@@ -69,14 +69,25 @@
             height: 100vh;
             background-color: black;
             color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px;
-            text-shadow: 0 0 10px white;
             visibility: hidden;
             opacity: 0;
             transition: opacity 1s;
+        }
+
+        .loading-content {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+            text-shadow: 0 0 10px white;
+        }
+
+        .loading-gif {
+            width: 40px;
+            height: auto;
         }
 
         /* Tela de Seleção de Jogos */
@@ -131,7 +142,12 @@
     </div>
 
     <!-- Tela de Loading -->
-    <div class="loading-screen">Carregando...</div>
+    <div class="loading-screen">
+        <div class="loading-content">
+            <img src="Human_walk_03.gif" class="loading-gif" alt="Carregando">
+            <span>Carregando...</span>
+        </div>
+    </div>
 
     <!-- Tela de Seleção de Jogos -->
     <div class="game-container">
@@ -159,7 +175,7 @@
                 // Esconder a tela inicial logo depois
                 setTimeout(() => {
                     document.querySelector('.video-container').style.display = 'none';
-                }, 100); // Pequeno delay para evitar piscada estranha
+                }, 100);
 
                 // Entrar no modo tela cheia
                 if (document.documentElement.requestFullscreen) {
