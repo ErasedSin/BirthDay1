@@ -20,7 +20,7 @@
             align-items: center;
             flex-direction: column;
         }
-        .video-container, .loading-screen, .game-container {
+        .video-container, .loading-container, .game-container {
             position: fixed;
             top: 0;
             left: 0;
@@ -31,7 +31,7 @@
             align-items: center;
             flex-direction: column;
         }
-        video {
+        .video-container video {
             width: auto;
             height: 100%;
             max-width: 100vw;
@@ -45,13 +45,7 @@
             font-size: 24px;
             color: #ff66b2;
             text-shadow: 0 0 10px #ff66b2, 0 0 20px #ff1493;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             animation: glow 1.5s infinite alternate;
-        }
-        .birthday-text span {
-            display: block;
         }
         .press-start {
             position: absolute;
@@ -74,30 +68,27 @@
             0% { text-shadow: 0 0 10px #ff66b2, 0 0 20px #ff1493; }
             100% { text-shadow: 0 0 20px #ff66b2, 0 0 30px #ff1493; }
         }
-        .loading-screen {
+
+        /* LOADING SCREEN */
+        .loading-container {
             display: none;
-            background: black;
-            color: white;
-            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-end;
+            padding: 20px;
         }
         .loading-text {
             font-size: 18px;
-            position: absolute;
-            bottom: 10%;
-            right: 5%;
+            color: white;
         }
-        .loading-gif {
-            width: 100px;
-            height: 100px;
+        .loading-container img {
+            width: 50px;
+            height: 50px;
         }
+
+        /* GAME SCREEN */
         .game-container {
             display: none;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
         }
         .carousel {
             display: flex;
@@ -111,7 +102,6 @@
             padding: 10px;
             cursor: pointer;
             border: 2px solid white;
-            display: inline-block;
             transition: transform 0.2s;
             font-size: 14px;
         }
@@ -126,14 +116,7 @@
     </style>
 </head>
 <body>
-    <audio id="bg-music" loop>
-        <source src="videoplayback.ogg" type="audio/ogg">
-    </audio>
-
-    <audio id="start-sound">
-        <source src="Soundstart.ogg" type="audio/ogg">
-    </audio>
-
+    <!-- TELA INICIAL -->
     <div class="video-container">
         <video autoplay loop muted playsinline>
             <source src="Smoking Girl from va-11 hall-a.mp4" type="video/mp4">
@@ -146,11 +129,13 @@
         <h1 class="press-start">Press Start</h1>
     </div>
 
-    <div class="loading-screen">
-        <img src="Human_walk_03.gif" alt="Loading..." class="loading-gif">
-        <h2 class="loading-text">Carregando...</h2>
+    <!-- TELA DE LOADING -->
+    <div class="loading-container">
+        <img src="Human_walk_03.gif" alt="Loading...">
+        <span class="loading-text">Carregando...</span>
     </div>
-    
+
+    <!-- TELA DE SELEÇÃO DE JOGOS -->
     <div class="game-container">
         <div class="carousel">
             <div class="game-selection" onclick="showDetails('jojo')">JoJo’s Bizarre Adventure</div>
@@ -164,32 +149,36 @@
         </div>
         <div class="game-details" id="game-details"></div>
     </div>
-    
+
+    <!-- ÁUDIO -->
+    <audio id="bg-music" loop>
+        <source src="videoplayback.ogg" type="audio/ogg">
+    </audio>
+    <audio id="start-sound">
+        <source src="Soundstart.m4a" type="audio/mpeg">
+    </audio>
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let bgMusic = document.getElementById("bg-music");
             let startSound = document.getElementById("start-sound");
-            let videoContainer = document.querySelector(".video-container");
-            let loadingScreen = document.querySelector(".loading-screen");
-            let gameContainer = document.querySelector(".game-container");
-            
-            // Volume do start sound
-            startSound.volume = 0.9;
 
-            // Música começa aos 9s
-            bgMusic.addEventListener("canplay", function () {
-                bgMusic.currentTime = 9;
+            startSound.volume = 0.5; 
+
+            bgMusic.addEventListener("canplaythrough", function () {
+                bgMusic.currentTime = 9; 
                 bgMusic.play();
-            });
+            }, { once: true });
 
-            document.querySelector(".press-start").addEventListener("click", function () {
+            document.querySelector('.press-start').addEventListener('click', function () {
                 startSound.play();
-                videoContainer.style.display = "none";
-                loadingScreen.style.display = "flex";
-                
+
+                document.querySelector('.video-container').style.display = 'none';
+                document.querySelector('.loading-container').style.display = 'flex';
+
                 setTimeout(function () {
-                    loadingScreen.style.display = "none";
-                    gameContainer.style.display = "flex";
+                    document.querySelector('.loading-container').style.display = 'none';
+                    document.querySelector('.game-container').style.display = 'flex';
                 }, 3000);
             });
         });
@@ -205,7 +194,6 @@
                 'abba': 'Dançar, brilhar e aproveitar a música! 🎶',
                 'mystery': 'Algo especial e inesperado está aqui... ✨'
             };
-            
             document.getElementById('game-details').innerText = details[game];
             document.getElementById('game-details').style.display = 'block';
         }
