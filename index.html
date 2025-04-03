@@ -46,9 +46,6 @@
             font-size: 24px;
             color: #ff66b2;
             text-shadow: 0 0 10px #ff66b2, 0 0 20px #ff1493;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             animation: glow 1.5s infinite alternate;
         }
         .press-start {
@@ -81,7 +78,6 @@
             height: 100vh;
             background-color: black;
             color: white;
-            display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
@@ -104,7 +100,6 @@
             width: 100vw;
             height: 100vh;
             overflow: hidden;
-            display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
@@ -146,6 +141,7 @@
         <source src="Soundstart.m4a" type="audio/mp4">
     </audio>
 
+    <!-- Tela inicial -->
     <div class="video-container">
         <video autoplay loop muted playsinline>
             <source src="Smoking Girl from va-11 hall-a.mp4" type="video/mp4">
@@ -194,7 +190,7 @@
             setTimeout(() => {
                 document.querySelector('.loading-screen').style.display = 'none';
                 document.querySelector('.game-container').style.display = 'flex';
-            }, 3000);
+            }, 2000);
         });
 
         function showDetails(game) {
