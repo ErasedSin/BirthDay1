@@ -75,29 +75,76 @@
         .loading-screen {
             display: none;
             position: fixed;
+            top: 0;
+            left: 0;
             width: 100vw;
             height: 100vh;
             background-color: black;
+            color: white;
+            display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            color: white;
-            font-size: 18px;
         }
         .loading-text {
+            font-size: 20px;
             position: absolute;
             bottom: 10px;
             right: 10px;
-            font-size: 14px;
-            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .loading-gif {
-            width: 80px;
+        .loading-text img {
+            width: 50px;
             height: auto;
+        }
+        .game-container {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            white-space: nowrap;
+            width: 90vw;
+            padding: 10px;
+            gap: 10px;
+        }
+        .game-selection {
+            padding: 10px;
+            cursor: pointer;
+            border: 2px solid white;
+            display: inline-block;
+            transition: transform 0.2s;
+            font-size: 14px;
+        }
+        .game-selection:hover {
+            transform: scale(1.1);
+        }
+        .game-details {
+            display: none;
+            margin-top: 10px;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
+    <!-- Música de fundo -->
+    <audio id="bg-music" loop autoplay>
+        <source src="videoplayback.m4a" type="audio/mp4">
+    </audio>
+
+    <!-- Efeito sonoro do Start -->
+    <audio id="start-sound">
+        <source src="Soundstart.m4a" type="audio/mp4">
+    </audio>
 
     <div class="video-container">
         <video autoplay loop muted playsinline>
@@ -111,51 +158,59 @@
         <h1 class="press-start">Press Start</h1>
     </div>
 
+    <!-- Tela de Loading -->
     <div class="loading-screen">
-        <img src="Human_walk_03.gif" alt="Loading..." class="loading-gif">
-        <div class="loading-text">Carregando...</div>
+        <div class="loading-text">
+            <img src="Human_walk_03.gif" alt="Loading">
+            Carregando...
+        </div>
+    </div>
+    
+    <!-- Tela de Seleção de Jogos -->
+    <div class="game-container">
+        <div class="carousel">
+            <div class="game-selection" onclick="showDetails('jojo')">JoJo’s Bizarre Adventure</div>
+            <div class="game-selection" onclick="showDetails('berserk')">Berserk</div>
+            <div class="game-selection" onclick="showDetails('valkyrie')">Shuumatsu no Valkyrie</div>
+            <div class="game-selection" onclick="showDetails('fight')">Jogo de Luta</div>
+            <div class="game-selection" onclick="showDetails('horror')">Jogo de Terror</div>
+            <div class="game-selection" onclick="showDetails('cyberpunk')">Cyberpunk/Gorillaz</div>
+            <div class="game-selection" onclick="showDetails('abba')">ABBA Energy</div>
+            <div class="game-selection" onclick="showDetails('mystery')">Misterioso/Especial</div>
+        </div>
+        <div class="game-details" id="game-details"></div>
     </div>
 
-    <audio id="bg-music" loop>
-        <source src="videoplayback.m4a" type="audio/mp4">
-    </audio>
-
-    <audio id="start-sound">
-        <source src="start-sound.mp3" type="audio/mp3">
-    </audio>
-
     <script>
-        const bgMusic = document.getElementById('bg-music');
-        const startSound = document.getElementById('start-sound');
-
-        // Reproduz a música de fundo quando o site carrega
-        window.addEventListener('load', () => {
-            bgMusic.play().catch(error => console.log("Autoplay bloqueado, clique para ativar o som."));
-        });
-
         document.querySelector('.press-start').addEventListener('click', function() {
-            startSound.play(); // Toca o som ao apertar "Press Start"
+            // Tocar efeito sonoro do start
+            document.getElementById('start-sound').play();
 
-            if (document.documentElement.requestFullscreen) {
-                document.documentElement.requestFullscreen();
-            } else if (document.documentElement.mozRequestFullScreen) {
-                document.documentElement.mozRequestFullScreen();
-            } else if (document.documentElement.webkitRequestFullscreen) {
-                document.documentElement.webkitRequestFullscreen();
-            } else if (document.documentElement.msRequestFullscreen) {
-                document.documentElement.msRequestFullscreen();
-            }
-            
+            // Esconder tela inicial e mostrar carregamento
             document.querySelector('.video-container').style.display = 'none';
             document.querySelector('.loading-screen').style.display = 'flex';
 
-            // Após 3 segundos, troca para a próxima tela
+            // Simular um tempo de carregamento antes de exibir a seleção de jogos
             setTimeout(() => {
                 document.querySelector('.loading-screen').style.display = 'none';
-                // Aqui você pode ativar a próxima tela se necessário
+                document.querySelector('.game-container').style.display = 'flex';
             }, 3000);
         });
-    </script>
 
+        function showDetails(game) {
+            let details = {
+                'jojo': 'Um jogo cheio de ação, poderes Stand e muita pose! 🎭',
+                'berserk': 'A escuridão e a fúria de Guts aguardam você. ⚔️',
+                'valkyrie': 'Grandes deuses e guerreiros em batalhas épicas! ⚡',
+                'fight': 'Entre no ringue e mostre sua força! 🥊',
+                'horror': 'O medo está sempre à espreita... Você tem coragem? 👁️',
+                'cyberpunk': 'Neon, tecnologia e um toque de rebeldia. 🔥',
+                'abba': 'Dançar, brilhar e aproveitar a música! 🎶',
+                'mystery': 'Algo especial e inesperado está aqui... ✨'
+            };
+            document.getElementById('game-details').innerText = details[game];
+            document.getElementById('game-details').style.display = 'block';
+        }
+    </script>
 </body>
 </html>
