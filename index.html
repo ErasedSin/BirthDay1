@@ -18,47 +18,39 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
         }
-
-        .hidden { display: none; }
-
-        .v-screen {
-            font-size: 100px;
-            color: #ff66b2;
-            text-shadow: 0 0 10px #ff66b2, 0 0 20px #ff1493;
-            cursor: pointer;
-            animation: blink 1s infinite;
-        }
-
-        .loading-screen {
-            font-size: 24px;
-            color: white;
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-        }
-
         .video-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
         }
-
         video {
             width: auto;
             height: 100%;
             max-width: 100vw;
             object-fit: contain;
         }
-
+        .birthday-text {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: #ff66b2;
+            text-shadow: 0 0 10px #ff66b2, 0 0 20px #ff1493;
+            animation: glow 1.5s infinite alternate;
+        }
         .press-start {
             position: absolute;
-            top: 50%;
+            top: 55%;
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 20px;
@@ -68,13 +60,15 @@
             padding: 10px;
             border-radius: 5px;
         }
-
         @keyframes blink {
             0% { opacity: 1; }
             50% { opacity: 0; }
             100% { opacity: 1; }
         }
-
+        @keyframes glow {
+            0% { text-shadow: 0 0 10px #ff66b2, 0 0 20px #ff1493; }
+            100% { text-shadow: 0 0 20px #ff66b2, 0 0 30px #ff1493; }
+        }
         .game-container {
             display: none;
             width: 100vw;
@@ -85,118 +79,28 @@
             justify-content: center;
             align-items: center;
         }
-
-        .carousel {
-            display: flex;
-            overflow-x: auto;
-            white-space: nowrap;
-            width: 90vw;
-            padding: 10px;
-            gap: 10px;
-        }
-
-        .game-selection {
-            padding: 10px;
-            cursor: pointer;
-            border: 2px solid white;
-            display: inline-block;
-            transition: transform 0.2s;
-            font-size: 14px;
-        }
-
-        .game-selection:hover {
-            transform: scale(1.1);
-        }
-
-        .game-details {
-            display: none;
-            margin-top: 10px;
-            font-size: 14px;
-        }
     </style>
 </head>
 <body>
-
-    <audio id="background-music" loop>
-        <source src="videoplayback.ogg" type="audio/ogg">
-    </audio>
-
-    <audio id="start-sound">
-        <source src="Soundstart.m4a" type="audio/mpeg">
-    </audio>
-
-    <!-- Tela inicial com "V" -->
-    <div class="v-screen" id="v-screen" onclick="startLoading()">V</div>
-
-    <!-- Tela de Loading -->
-    <div class="loading-screen hidden" id="loading-screen">Carregando...</div>
-
-    <!-- Tela de Press Start -->
-    <div class="video-container hidden" id="video-container">
+    <div class="video-container">
         <video autoplay loop muted playsinline>
             <source src="Smoking Girl from va-11 hall-a.mp4" type="video/mp4">
             Seu navegador não suporta vídeos.
         </video>
+        <h1 class="birthday-text">V<br>18 anos de força, sonhos e um futuro brilhante! 💖</h1>
         <h1 class="press-start" onclick="startGame()">Press Start</h1>
     </div>
 
-    <!-- Tela de Seleção de Jogos -->
-    <div class="game-container hidden" id="game-container">
-        <div class="carousel">
-            <div class="game-selection" onclick="showDetails('jojo')">JoJo’s Bizarre Adventure</div>
-            <div class="game-selection" onclick="showDetails('berserk')">Berserk</div>
-            <div class="game-selection" onclick="showDetails('valkyrie')">Shuumatsu no Valkyrie</div>
-            <div class="game-selection" onclick="showDetails('fight')">Jogo de Luta</div>
-            <div class="game-selection" onclick="showDetails('horror')">Jogo de Terror</div>
-            <div class="game-selection" onclick="showDetails('cyberpunk')">Cyberpunk/Gorillaz</div>
-            <div class="game-selection" onclick="showDetails('abba')">ABBA Energy</div>
-            <div class="game-selection" onclick="showDetails('mystery')">Misterioso/Especial</div>
-        </div>
-        <div class="game-details" id="game-details"></div>
+    <div class="game-container">
+        <h2>Escolha um jogo</h2>
+        <!-- Aqui virão os jogos -->
     </div>
 
     <script>
-        let music = document.getElementById("background-music");
-        let startSound = document.getElementById("start-sound");
-
-        function startLoading() {
-            document.getElementById("v-screen").classList.add("hidden");
-            document.getElementById("loading-screen").classList.remove("hidden");
-
-            setTimeout(() => {
-                document.getElementById("loading-screen").classList.add("hidden");
-                document.getElementById("video-container").classList.remove("hidden");
-
-                // Toca a música quando a tela de "Press Start" aparece
-                music.currentTime = 5; // Começa no segundo 5
-                music.play();
-            }, 2000); // Tempo da tela de loading
-        }
-
         function startGame() {
-            startSound.volume = 0.5; // Abaixa o volume do som do start
-            startSound.play();
-
-            document.getElementById("video-container").classList.add("hidden");
-            document.getElementById("game-container").classList.remove("hidden");
-        }
-
-        function showDetails(game) {
-            let details = {
-                'jojo': 'Um jogo cheio de ação, poderes Stand e muita pose! 🎭',
-                'berserk': 'A escuridão e a fúria de Guts aguardam você. ⚔️',
-                'valkyrie': 'Grandes deuses e guerreiros em batalhas épicas! ⚡',
-                'fight': 'Entre no ringue e mostre sua força! 🥊',
-                'horror': 'O medo está sempre à espreita... Você tem coragem? 👁️',
-                'cyberpunk': 'Neon, tecnologia e um toque de rebeldia. 🔥',
-                'abba': 'Dançar, brilhar e aproveitar a música! 🎶',
-                'mystery': 'Algo especial e inesperado está aqui... ✨'
-            };
-
-            document.getElementById('game-details').innerText = details[game];
-            document.getElementById('game-details').style.display = 'block';
+            document.querySelector('.video-container').style.display = 'none';
+            document.querySelector('.game-container').style.display = 'flex';
         }
     </script>
-
 </body>
 </html>
