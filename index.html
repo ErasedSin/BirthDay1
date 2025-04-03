@@ -41,6 +41,19 @@
             object-fit: contain;
         }
 
+        .birthday-text {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 16px;
+            color: white;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+            text-shadow: 0 0 5px white;
+        }
+
         .press-start {
             position: absolute;
             top: 50%;
@@ -136,6 +149,10 @@
             <source src="Smoking Girl from va-11 hall-a.mp4" type="video/mp4">
             Seu navegador não suporta vídeos.
         </video>
+        <h1 class="birthday-text">
+            <span>V</span>
+            <span>18 anos de força, sonhos e um futuro brilhante! 💖</span>
+        </h1>
         <h1 class="press-start">Press Start</h1>
     </div>
 
@@ -166,17 +183,20 @@
         document.addEventListener("DOMContentLoaded", function() {
             document.querySelector('.press-start').addEventListener('click', function() {
                 let pressStart = document.querySelector('.press-start');
+                let birthdayText = document.querySelector('.birthday-text');
                 let videoContainer = document.querySelector('.video-container');
                 let loadingScreen = document.querySelector('.loading-screen');
                 let gameContainer = document.querySelector('.game-container');
 
-                // Esconder "Press Start" com uma transição suave
+                // Esconder "Press Start" e o texto de aniversário suavemente
                 pressStart.style.opacity = '0';
+                birthdayText.style.opacity = '0';
                 setTimeout(() => {
                     pressStart.style.display = 'none';
+                    birthdayText.style.display = 'none';
                 }, 500);
 
-                // Pequeno atraso para manter a tela inicial visível antes da transição
+                // Pequeno atraso antes do loading
                 setTimeout(() => {
                     videoContainer.style.display = 'none';
                     loadingScreen.style.display = 'flex';
