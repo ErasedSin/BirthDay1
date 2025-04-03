@@ -47,11 +47,14 @@
             left: 50%;
             transform: translateX(-50%);
             font-size: 16px;
-            color: white;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 10px;
-            border-radius: 5px;
-            text-shadow: 0 0 5px white;
+            color: #ff66b2;
+            text-shadow: 0 0 10px #ff66b2, 0 0 20px #ff1493;
+            animation: glow 1.5s infinite alternate;
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 10px #ff66b2, 0 0 20px #ff1493; }
+            100% { text-shadow: 0 0 20px #ff66b2, 0 0 30px #ff1493; }
         }
 
         .press-start {
@@ -94,6 +97,9 @@
             gap: 10px;
             font-size: 18px;
             text-shadow: 0 0 10px white;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
         }
 
         .loading-gif {
@@ -205,12 +211,6 @@
                 // Entrar no modo tela cheia
                 if (document.documentElement.requestFullscreen) {
                     document.documentElement.requestFullscreen();
-                } else if (document.documentElement.mozRequestFullScreen) {
-                    document.documentElement.mozRequestFullScreen();
-                } else if (document.documentElement.webkitRequestFullscreen) {
-                    document.documentElement.webkitRequestFullscreen();
-                } else if (document.documentElement.msRequestFullscreen) {
-                    document.documentElement.msRequestFullscreen();
                 }
 
                 // Após 3 segundos, esconder a tela de loading e mostrar o menu
@@ -239,3 +239,4 @@
     </script>
 </body>
 </html>
+
