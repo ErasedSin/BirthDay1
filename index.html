@@ -20,13 +20,12 @@
             align-items: center;
             flex-direction: column;
         }
-        .video-container {
+        .video-container, .loading-screen, .game-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -46,7 +45,13 @@
             font-size: 24px;
             color: #ff66b2;
             text-shadow: 0 0 10px #ff66b2, 0 0 20px #ff1493;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             animation: glow 1.5s infinite alternate;
+        }
+        .birthday-text span {
+            display: block;
         }
         .press-start {
             position: absolute;
@@ -71,29 +76,19 @@
         }
         .loading-screen {
             display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: black;
+            background: black;
             color: white;
-            justify-content: center;
-            align-items: center;
             flex-direction: column;
         }
         .loading-text {
-            font-size: 20px;
+            font-size: 18px;
             position: absolute;
-            bottom: 10px;
-            right: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            bottom: 10%;
+            right: 5%;
         }
-        .loading-text img {
-            width: 50px;
-            height: auto;
+        .loading-gif {
+            width: 100px;
+            height: 100px;
         }
         .game-container {
             display: none;
@@ -131,17 +126,14 @@
     </style>
 </head>
 <body>
-    <!-- Música de fundo -->
-    <audio id="bg-music" loop autoplay>
-        <source src="videoplayback.m4a" type="audio/mp4">
+    <audio id="bg-music" loop>
+        <source src="videoplayback.ogg" type="audio/ogg">
     </audio>
 
-    <!-- Efeito sonoro do Start -->
     <audio id="start-sound">
-        <source src="Soundstart.m4a" type="audio/mp4">
+        <source src="Soundstart.ogg" type="audio/ogg">
     </audio>
 
-    <!-- Tela inicial -->
     <div class="video-container">
         <video autoplay loop muted playsinline>
             <source src="Smoking Girl from va-11 hall-a.mp4" type="video/mp4">
@@ -154,15 +146,11 @@
         <h1 class="press-start">Press Start</h1>
     </div>
 
-    <!-- Tela de Loading -->
     <div class="loading-screen">
-        <div class="loading-text">
-            <img src="Human_walk_03.gif" alt="Loading">
-            Carregando...
-        </div>
+        <img src="Human_walk_03.gif" alt="Loading..." class="loading-gif">
+        <h2 class="loading-text">Carregando...</h2>
     </div>
     
-    <!-- Tela de Seleção de Jogos -->
     <div class="game-container">
         <div class="carousel">
             <div class="game-selection" onclick="showDetails('jojo')">JoJo’s Bizarre Adventure</div>
@@ -176,21 +164,34 @@
         </div>
         <div class="game-details" id="game-details"></div>
     </div>
-
+    
     <script>
-        document.querySelector('.press-start').addEventListener('click', function() {
-            // Tocar efeito sonoro do start
-            document.getElementById('start-sound').play();
+        document.addEventListener("DOMContentLoaded", function () {
+            let bgMusic = document.getElementById("bg-music");
+            let startSound = document.getElementById("start-sound");
+            let videoContainer = document.querySelector(".video-container");
+            let loadingScreen = document.querySelector(".loading-screen");
+            let gameContainer = document.querySelector(".game-container");
+            
+            // Volume do start sound
+            startSound.volume = 0.9;
 
-            // Esconder tela inicial e mostrar carregamento
-            document.querySelector('.video-container').style.display = 'none';
-            document.querySelector('.loading-screen').style.display = 'flex';
+            // Música começa aos 9s
+            bgMusic.addEventListener("canplay", function () {
+                bgMusic.currentTime = 9;
+                bgMusic.play();
+            });
 
-            // Simular um tempo de carregamento antes de exibir a seleção de jogos
-            setTimeout(() => {
-                document.querySelector('.loading-screen').style.display = 'none';
-                document.querySelector('.game-container').style.display = 'flex';
-            }, 2000);
+            document.querySelector(".press-start").addEventListener("click", function () {
+                startSound.play();
+                videoContainer.style.display = "none";
+                loadingScreen.style.display = "flex";
+                
+                setTimeout(function () {
+                    loadingScreen.style.display = "none";
+                    gameContainer.style.display = "flex";
+                }, 3000);
+            });
         });
 
         function showDetails(game) {
@@ -204,6 +205,7 @@
                 'abba': 'Dançar, brilhar e aproveitar a música! 🎶',
                 'mystery': 'Algo especial e inesperado está aqui... ✨'
             };
+            
             document.getElementById('game-details').innerText = details[game];
             document.getElementById('game-details').style.display = 'block';
         }
