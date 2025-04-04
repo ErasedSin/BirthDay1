@@ -118,7 +118,7 @@
       scroll-snap-align: center;
       width: 100px;
       height: 100px;
-      background: #111;
+      background: rgba(255, 102, 178, 0.1);
       border: 3px solid #ff66b2;
       box-shadow: 0 0 10px #ff66b2;
       display: flex;
@@ -127,22 +127,19 @@
       cursor: pointer;
       font-size: 24px;
       transition: transform 0.3s;
+      animation: float 2s ease-in-out infinite alternate;
       user-select: none;
+      color: white;
+      text-shadow: 0 0 10px #ff66b2;
     }
 
-    .frame:first-child {
-      background-image: url('/mnt/data/artworks-000505096608-016bv4-t500x500.jpg');
-      background-size: cover;
-      background-position: center;
+    @keyframes float {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
     }
 
-    .frame.selected {
-      animation: spin 1s linear;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    .frame:hover {
+      transform: scale(1.1);
     }
 
     .diary-text {
@@ -151,30 +148,128 @@
       text-align: center;
       font-size: 12px;
       max-width: 90vw;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      box-shadow: 0 0 10px #fff2;
+    }
+
+    .frame.active {
+      animation: pulse 0.6s ease-in-out;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 10px #ff66b2; }
+      50% { transform: scale(1.2); box-shadow: 0 0 20px #ff99cc; }
+      100% { transform: scale(1); box-shadow: 0 0 10px #ff66b2; }
     }
   </style>
 </head>
 <body>
+  <audio id="start-sound">
+    <source src="Soundstart.m4a" type="audio/mp4" />
+  </audio>
+
+  <!-- Sons individuais para cada quadro -->
+  <audio id="sound0" src="sounds/jojo.mp3"></audio>
+  <audio id="sound1" src="sounds/berserk.mp3"></audio>
+  <audio id="sound2" src="sounds/valkyrie.mp3"></audio>
+  <audio id="sound3" src="sounds/luta.mp3"></audio>
+  <audio id="sound4" src="sounds/terror.mp3"></audio>
+  <audio id="sound5" src="sounds/gorillaz.mp3"></audio>
+  <audio id="sound6" src="sounds/abba.mp3"></audio>
+  <audio id="sound7" src="sounds/segredo.mp3"></audio>
+
+  <div class="video-container" id="intro">
+    <video autoplay loop muted playsinline>
+      <source src="Smoking Girl from va-11 hall-a.mp4" type="video/mp4" />
+    </video>
+    <h1 class="birthday-text">
+      <span>V</span><br />
+      <span>18 anos de força, sonhos e um futuro brilhante! 💖</span>
+    </h1>
+    <h1 class="press-start" id="startBtn">Press Start</h1>
+  </div>
+
+  <div class="loading-screen" id="loading">
+    <div class="loading-text">
+      <img src="Human_walk_03.gif" alt="Loading" />
+      Carregando...
+    </div>
+  </div>
+
   <div class="memory-room" id="memory">
-    <div class="carousel">
-      <div class="frame" onclick="selectFrame(this, 0)"></div>
-      <div class="frame" onclick="selectFrame(this, 1)">⚔️</div>
-      <div class="frame" onclick="selectFrame(this, 2)">⚡</div>
-      <div class="frame" onclick="selectFrame(this, 3)">🥊</div>
-      <div class="frame" onclick="selectFrame(this, 4)">👁️</div>
-      <div class="frame" onclick="selectFrame(this, 5)">🔥</div>
-      <div class="frame" onclick="selectFrame(this, 6)">🎶</div>
-      <div class="frame" onclick="selectFrame(this, 7)">✨</div>
+    <div class="carousel" id="carousel">
+      <div class="frame" onclick="showMemory(0)">🎭</div>
+      <div class="frame" onclick="showMemory(1)">⚔️</div>
+      <div class="frame" onclick="showMemory(2)">⚡</div>
+      <div class="frame" onclick="showMemory(3)">🥊</div>
+      <div class="frame" onclick="showMemory(4)">👁️</div>
+      <div class="frame" onclick="showMemory(5)">🔥</div>
+      <div class="frame" onclick="showMemory(6)">🎶</div>
+      <div class="frame" onclick="showMemory(7)">✨</div>
     </div>
     <div class="diary-text" id="diary"></div>
   </div>
 
   <script>
-    function selectFrame(element, index) {
-      element.classList.add("selected");
+    const startSound = document.getElementById("start-sound");
+    const intro = document.getElementById("intro");
+    const loading = document.getElementById("loading");
+    const memory = document.getElementById("memory");
+    const diary = document.getElementById("diary");
+
+    document.getElementById("startBtn").addEventListener("click", () => {
+      startSound.play();
+      intro.classList.add("hidden");
       setTimeout(() => {
-        element.classList.remove("selected");
+        intro.style.display = "none";
+        loading.style.display = "flex";
+        loading.classList.remove("hidden");
+        setTimeout(() => {
+          loading.classList.add("hidden");
+          setTimeout(() => {
+            loading.style.display = "none";
+            memory.style.display = "flex";
+            memory.classList.remove("hidden");
+          }, 1000);
+        }, 3000);
       }, 1000);
+    });
+
+    const texts = [
+      "JoJo me lembra o quanto você é única... cheia de estilo, força e estranheza boa.",
+      "A escuridão de Berserk é como sua força: mesmo nos dias difíceis, você brilha.",
+      "Valkyrie tem batalhas épicas — como as que você vence todo dia.",
+      "Nosso próprio jogo de luta: juntos, lado a lado, vencendo qualquer fase.",
+      "Mesmo nos momentos de medo, você é minha coragem.",
+      "Um universo neon e caótico, como nossos sonhos mais doidos.",
+      "Quando ouço ABBA, penso em você dançando, linda e livre.",
+      "Esse quadro... é um segredo especial só nosso."
+    ];
+
+    function showMemory(index) {
+      const frames = document.querySelectorAll('.frame');
+      frames.forEach((frame, i) => {
+        frame.classList.remove('active');
+      });
+      const selected = frames[index];
+      selected.classList.add('active');
+
+      diary.innerText = texts[index];
+      diary.style.display = "block";
+      diary.onclick = () => {
+        diary.style.display = "none";
+      };
+
+      const sound = document.getElementById("sound" + index);
+      if (sound) {
+        document.querySelectorAll("audio").forEach(a => {
+          if (a !== sound && a !== startSound) a.pause();
+        });
+        sound.currentTime = 0;
+        sound.play();
+      }
     }
   </script>
 </body>
