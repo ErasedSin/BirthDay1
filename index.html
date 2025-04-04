@@ -9,34 +9,37 @@
         body {
             background-color: black;
             color: white;
-            text-align: center;
             font-family: 'Press Start 2P', cursive;
             margin: 0;
             overflow: hidden;
+        }
+
+        .video-container,
+        .loading-screen,
+        .memory-room {
             width: 100vw;
             height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        .video-container {
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            transition: opacity 1s ease-in-out;
         }
-        video {
+
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .video-container video {
             width: auto;
             height: 100%;
-            max-width: 100vw;
             object-fit: contain;
         }
+
         .birthday-text {
             position: absolute;
             top: 20%;
@@ -46,7 +49,9 @@
             color: #ff66b2;
             text-shadow: 0 0 10px #ff66b2, 0 0 20px #ff1493;
             animation: glow 1.5s infinite alternate;
+            text-align: center;
         }
+
         .press-start {
             position: absolute;
             top: 50%;
@@ -55,60 +60,66 @@
             font-size: 20px;
             animation: blink 1s infinite;
             cursor: pointer;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-            border-radius: 5px;
         }
+
         @keyframes blink {
-            0% { opacity: 1; }
+            0%, 100% { opacity: 1; }
             50% { opacity: 0; }
-            100% { opacity: 1; }
         }
+
         @keyframes glow {
             0% { text-shadow: 0 0 10px #ff66b2, 0 0 20px #ff1493; }
             100% { text-shadow: 0 0 20px #ff66b2, 0 0 30px #ff1493; }
         }
+
         .loading-screen {
             display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: black;
-            color: white;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
         }
-        .game-container {
-            display: none;
-            width: 100vw;
-            height: 100vh;
-            justify-content: center;
-            align-items: center;
-        }
-        .carousel {
+
+        .loading-text {
+            font-size: 20px;
             display: flex;
-            overflow-x: auto;
-            white-space: nowrap;
-            width: 90vw;
-            padding: 10px;
+            align-items: center;
             gap: 10px;
         }
-        .game-selection {
-            padding: 10px;
-            cursor: pointer;
-            border: 2px solid white;
-            display: inline-block;
-            transition: transform 0.2s;
+
+        .loading-text img {
+            width: 50px;
         }
-        .game-selection:hover {
+
+        .memory-room {
+            display: none;
+            background: black;
+            flex-wrap: wrap;
+            padding: 20px;
+            gap: 20px;
+            overflow-y: auto;
+        }
+
+        .frame {
+            width: 120px;
+            height: 120px;
+            background: #111;
+            border: 3px solid #ff66b2;
+            box-shadow: 0 0 10px #ff66b2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .frame:hover {
             transform: scale(1.1);
         }
-        .game-details {
+
+        .diary-text {
             display: none;
-            margin-top: 10px;
+            color: white;
+            text-align: center;
+            font-size: 12px;
+            margin-top: 20px;
+            max-width: 90vw;
         }
     </style>
 </head>
@@ -117,60 +128,76 @@
         <source src="Soundstart.m4a" type="audio/mp4">
     </audio>
 
-    <div class="video-container">
+    <div class="video-container" id="intro">
         <video autoplay loop muted playsinline>
             <source src="Smoking Girl from va-11 hall-a.mp4" type="video/mp4">
-            Seu navegador não suporta vídeos.
         </video>
-        <h1 class="birthday-text">V<br>18 anos de força, sonhos e um futuro brilhante! 💖</h1>
-        <h1 class="press-start">Press Start</h1>
+        <h1 class="birthday-text">
+            <span>V</span><br>
+            <span>18 anos de força, sonhos e um futuro brilhante! 💖</span>
+        </h1>
+        <h1 class="press-start" id="startBtn">Press Start</h1>
     </div>
 
-    <div class="loading-screen">Carregando...</div>
-
-    <div class="game-container">
-        <div class="carousel">
-            <div class="game-selection" onclick="showDetails('jojo')">JoJo’s Bizarre Adventure</div>
-            <div class="game-selection" onclick="showDetails('berserk')">Berserk</div>
-            <div class="game-selection" onclick="showDetails('valkyrie')">Shuumatsu no Valkyrie</div>
-            <div class="game-selection" onclick="showDetails('fight')">Jogo de Luta</div>
-            <div class="game-selection" onclick="showDetails('horror')">Jogo de Terror</div>
-            <div class="game-selection" onclick="showDetails('cyberpunk')">Cyberpunk/Gorillaz</div>
-            <div class="game-selection" onclick="showDetails('abba')">ABBA Energy</div>
-            <div class="game-selection" onclick="showDetails('mystery')">Misterioso/Especial</div>
+    <div class="loading-screen" id="loading">
+        <div class="loading-text">
+            <img src="Human_walk_03.gif" alt="Loading">
+            Carregando...
         </div>
-        <div class="game-details" id="game-details"></div>
+    </div>
+
+    <div class="memory-room" id="memory">
+        <div class="frame" onclick="showMemory(0)">🎭</div>
+        <div class="frame" onclick="showMemory(1)">⚔️</div>
+        <div class="frame" onclick="showMemory(2)">⚡</div>
+        <div class="frame" onclick="showMemory(3)">🥊</div>
+        <div class="frame" onclick="showMemory(4)">👁️</div>
+        <div class="frame" onclick="showMemory(5)">🔥</div>
+        <div class="frame" onclick="showMemory(6)">🎶</div>
+        <div class="frame" onclick="showMemory(7)">✨</div>
+        <div class="diary-text" id="diary"></div>
     </div>
 
     <script>
-        document.querySelector('.press-start').addEventListener('click', function() {
-            let startSound = document.getElementById('start-sound');
-            startSound.play().catch(error => console.log("Erro ao tocar som: ", error));
+        const startSound = document.getElementById("start-sound");
+        const intro = document.getElementById("intro");
+        const loading = document.getElementById("loading");
+        const memory = document.getElementById("memory");
+        const diary = document.getElementById("diary");
 
-            document.querySelector('.video-container').style.display = 'none';
-            document.querySelector('.loading-screen').style.display = 'flex';
-
+        document.getElementById("startBtn").addEventListener("click", () => {
+            startSound.play();
+            intro.classList.add("hidden");
             setTimeout(() => {
-                document.querySelector('.loading-screen').style.display = 'none';
-                document.querySelector('.game-container').style.display = 'flex';
-            }, 3000);
+                intro.style.display = "none";
+                loading.style.display = "flex";
+                loading.classList.remove("hidden");
+                setTimeout(() => {
+                    loading.classList.add("hidden");
+                    setTimeout(() => {
+                        loading.style.display = "none";
+                        memory.style.display = "flex";
+                        memory.classList.remove("hidden");
+                    }, 1000);
+                }, 3000);
+            }, 1000);
         });
 
-        function showDetails(game) {
-            let details = {
-                'jojo': 'Um jogo cheio de ação, poderes Stand e muita pose! 🎭',
-                'berserk': 'A escuridão e a fúria de Guts aguardam você. ⚔️',
-                'valkyrie': 'Grandes deuses e guerreiros em batalhas épicas! ⚡',
-                'fight': 'Entre no ringue e mostre sua força! 🥊',
-                'horror': 'O medo está sempre à espreita... Você tem coragem? 👁️',
-                'cyberpunk': 'Neon, tecnologia e um toque de rebeldia. 🔥',
-                'abba': 'Dançar, brilhar e aproveitar a música! 🎶',
-                'mystery': 'Algo especial e inesperado está aqui... ✨'
-            };
-            document.getElementById('game-details').innerText = details[game];
-            document.getElementById('game-details').style.display = 'block';
+        const texts = [
+            "JoJo me lembra o quanto você é única... cheia de estilo, força e estranheza boa.",
+            "A escuridão de Berserk é como sua força: mesmo nos dias difíceis, você brilha.",
+            "Valkyrie tem batalhas épicas — como as que você vence todo dia.",
+            "Nosso próprio jogo de luta: juntos, lado a lado, vencendo qualquer fase.",
+            "Mesmo nos momentos de medo, você é minha coragem.",
+            "Um universo neon e caótico, como nossos sonhos mais doidos.",
+            "Quando ouço ABBA, penso em você dançando, linda e livre.",
+            "Esse quadro... é um segredo especial só nosso."
+        ];
+
+        function showMemory(index) {
+            diary.innerText = texts[index];
+            diary.style.display = "block";
         }
     </script>
 </body>
 </html>
-
