@@ -14,9 +14,7 @@
       overflow: hidden;
     }
 
-    .video-container,
-    .loading-screen,
-    .memory-room {
+    .video-container, .loading-screen, .memory-room {
       width: 100vw;
       height: 100vh;
       position: absolute;
@@ -182,11 +180,7 @@
   </style>
 </head>
 <body>
-  <audio id="start-sound">
-    <source src="Soundstart.m4a" type="audio/mp4" />
-  </audio>
-
-  <!-- Sons individuais para cada quadro -->
+  <audio id="start-sound"><source src="Soundstart.m4a" type="audio/mp4" /></audio>
   <audio id="sound0" src="sounds/jojo.mp3"></audio>
   <audio id="sound1" src="sounds/berserk.mp3"></audio>
   <audio id="sound2" src="sounds/valkyrie.mp3"></audio>
@@ -195,6 +189,7 @@
   <audio id="sound5" src="sounds/gorillaz.mp3"></audio>
   <audio id="sound6" src="sounds/abba.mp3"></audio>
   <audio id="sound7" src="sounds/segredo.mp3"></audio>
+  <audio id="sound8" src="voz.mp3"></audio>
 
   <div class="video-container" id="intro">
     <video autoplay loop muted playsinline>
@@ -226,6 +221,7 @@
       <div class="frame" onclick="showMemory(5)">🔥</div>
       <div class="frame" onclick="showMemory(6)">🎶</div>
       <div class="frame" onclick="showMemory(7)">✨</div>
+      <div class="frame" onclick="openSecret()">?</div>
     </div>
     <div class="diary-text" id="diary"></div>
   </div>
@@ -257,13 +253,13 @@
 
     const texts = [
       "JoJo me lembra o quanto você é única... cheia de estilo, força e estranheza boa.",
-      "A escuridão de Berserk é como sua força: mesmo nos dias difíceis, você brilha.",
-      "Valkyrie tem batalhas épicas — como as que você vence todo dia.",
-      "Nosso próprio jogo de luta: juntos, lado a lado, vencendo qualquer fase.",
-      "Mesmo nos momentos de medo, você é minha coragem.",
-      "Um universo neon e caótico, como nossos sonhos mais doidos.",
-      "Quando ouço ABBA, penso em você dançando, linda e livre.",
-      "Esse quadro... é um segredo especial só nosso."
+      "Berserk mostra como mesmo em meio à dor, você continua brilhando com coragem.",
+      "As lutas de Valkyrie são como suas conquistas diárias: épicas, lindas, inspiradoras.",
+      "Nosso próprio jogo de luta: dois corações lutando juntos, vencendo cada fase.",
+      "Mesmo no medo, você é minha luz. Minha coragem. Meu abrigo.",
+      "Nosso mundo caótico, com luzes e sonhos... mas sempre ao seu lado, tudo faz sentido.",
+      "ABBA toca e vejo você: dançando, sorrindo, livre. Um raio de sol.",
+      "Esse quadro... é nosso segredo. Um portal para tudo que ainda vamos viver.",
     ];
 
     function showMemory(index) {
@@ -295,6 +291,19 @@
           element.classList.remove("rotate-once");
         }, 1000);
       }
+    }
+
+    function openSecret() {
+      const win = window.open('', '_blank');
+      win.document.write(`
+        <html><head><title>Segredo</title><style>
+          body { background:black; color:white; display:flex; align-items:center; justify-content:center; height:100vh; font-family: monospace; font-size: 20px; }
+        </style></head><body>
+          <p>Shh... escute com o coração.</p>
+          <audio autoplay><source src="voz.mp3" type="audio/mp3"></audio>
+        </body></html>
+      `);
+      win.document.close();
     }
   </script>
 </body>
