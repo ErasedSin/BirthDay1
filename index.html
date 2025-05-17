@@ -1,224 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-<title>Birthday Project</title>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+<!-- ... [cabeçalho e estilos anteriores] ... -->
 <style>
-/* [Estilos: mesmos do seu código anterior, sem mudanças] */
-body {
-background-color: black;
-color: white;
-font-family: 'Press Start 2P', cursive;
-margin: 0;
-overflow: hidden;
+/* ... [estilos anteriores] ... */
+
+.audio-toggle {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid #ff66b2;
+  color: #ff66b2;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  padding: 8px 10px;
+  cursor: pointer;
+  text-shadow: 0 0 5px #ff66b2;
+  box-shadow: 0 0 10px #ff66b2;
+  transition: background 0.3s, color 0.3s;
 }
-.video-container, .loading-screen, .memory-room {
-width: 100vw;
-height: 100vh;
-position: absolute;
-top: 0;
-left: 0;
-display: flex;
-justify-content: center;
-align-items: center;
-flex-direction: column;
-transition: opacity 1s ease-in-out;
-}
-.hidden {
-opacity: 0;
-pointer-events: none;
-}
-.video-container video {
-width: auto;
-height: 100%;
-object-fit: contain;
-}
-.birthday-text {
-position: absolute;
-top: 20%;
-left: 50%;
-transform: translate(-50%, -50%);
-font-size: 24px;
-color: #ff66b2;
-text-shadow: 0 0 10px #ff66b2, 0 0 20px #ff1493;
-animation: glow 1.5s infinite alternate;
-text-align: center;
-}
-.press-start {
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-font-size: 20px;
-animation: blink 1s infinite;
-cursor: pointer;
-}
-@keyframes blink {
-0%, 100% { opacity: 1; }
-50% { opacity: 0; }
-}
-@keyframes glow {
-0% { text-shadow: 0 0 10px #ff66b2, 0 0 20px #ff1493; }
-100% { text-shadow: 0 0 20px #ff66b2, 0 0 30px #ff1493; }
-}
-.loading-screen {
-display: none;
-}
-.loading-text {
-font-size: 20px;
-display: flex;
-align-items: center;
-gap: 10px;
-}
-.loading-text img {
-width: 50px;
-}
-.memory-room {
-display: none;
-background: url("0k6meqvps4h91.gif") center/cover no-repeat;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-padding: 20px;
-gap: 20px;
-}
-.carousel {
-display: flex;
-overflow-x: scroll;
-gap: 15px;
-padding: 10px;
-scroll-snap-type: x mandatory;
-width: 90vw;
-cursor: grab;
--webkit-overflow-scrolling: touch;
-scrollbar-width: none;
-}
-.carousel::-webkit-scrollbar {
-display: none;
-}
-.frame {
-flex: 0 0 auto;
-scroll-snap-align: center;
-width: 100px;
-height: 100px;
-background: rgba(255, 102, 178, 0.1);
-border: 3px solid #ff66b2;
-box-shadow: 0 0 10px #ff66b2;
-display: flex;
-justify-content: center;
-align-items: center;
-cursor: pointer;
-font-size: 24px;
-transition: transform 0.3s;
-animation: float 2s ease-in-out infinite alternate;
-user-select: none;
-color: white;
-text-shadow: 0 0 10px #ff66b2;
-position: relative;
-}
-.frame img {
-width: 100%;
-height: 100%;
-object-fit: cover;
-}
-@keyframes float {
-0% { transform: translateY(0); }
-100% { transform: translateY(-10px); }
-}
-.frame:hover {
-transform: scale(1.1);
-}
-.diary-text {
-display: none;
-color: white;
-text-align: center;
-font-size: 12px;
-max-width: 90vw;
-padding: 10px;
-background: rgba(255, 255, 255, 0.05);
-border-radius: 10px;
-box-shadow: 0 0 10px #fff2;
-}
-.frame.active {
-animation: pulse 0.6s ease-in-out;
-}
-@keyframes pulse {
-0% { transform: scale(1); box-shadow: 0 0 10px #ff66b2; }
-50% { transform: scale(1.2); box-shadow: 0 0 20px #ff99cc; }
-100% { transform: scale(1); box-shadow: 0 0 10px #ff66b2; }
-}
-@keyframes rotateOnce {
-0% { transform: rotateY(0); }
-100% { transform: rotateY(360deg); }
-}
-.rotate-once {
-animation: rotateOnce 1s linear;
+
+.audio-toggle:hover {
+  background: #ff66b2;
+  color: black;
 }
 </style>
 </head>
 <body>
+<!-- BOTÃO DE ÁUDIO -->
+<button class="audio-toggle" onclick="toggleAudio()" id="audioBtn">🔊 Música</button>
+
 <audio id="start-sound" src="Soundstart.m4a"></audio>
 <audio id="bg-music" src="musica-especial.mp3" loop></audio>
 
-<!-- Sons dos quadros -->
-<audio id="sound0" src="sounds/jojo.mp3"></audio>
-<audio id="sound1" src="sounds/berserk.mp3"></audio>
-<audio id="sound2" src="sounds/valkyrie.mp3"></audio>
-<audio id="sound3" src="sounds/luta.mp3"></audio>
-<audio id="sound4" src="sounds/terror.mp3"></audio>
-<audio id="sound5" src="sounds/gorillaz.mp3"></audio>
-<audio id="sound6" src="sounds/abba.mp3"></audio>
-<audio id="sound7" src="sounds/segredo.mp3"></audio>
-<audio id="sound8" src="voz.mp3"></audio>
-
-<div class="video-container" id="intro">
-<video autoplay loop muted playsinline>
-<source src="Smoking Girl from va-11 hall-a.mp4" type="video/mp4" />
-</video>
-<h1 class="birthday-text">V<br />18 anos de força, sonhos e um futuro brilhante! 💖</h1>
-<h1 class="press-start" id="startBtn">Press Start</h1>
-</div>
-
-<div class="loading-screen" id="loading">
-<div class="loading-text">
-<img src="Human_walk_03.gif" alt="Loading" />
-Carregando...
-</div>
-</div>
-
-<div class="memory-room" id="memory">
-<div class="carousel" id="carousel">
-<div class="frame" onclick="rotateOnce(this); showMemory(0)">
-<img src="artworks-000505096608-016bv4-t500x500.jpg" alt="Quadro 1">
-</div>
-<div class="frame" onclick="showMemory(1)">
-<img src="jojo-pixel.png" alt="Quadro 2">
-</div>
-<div class="frame" onclick="showMemory(2)">
-<img src="i-love-you.png" alt="Quadro 3">
-</div>
-<div class="frame" onclick="showMemory(3)">
-<img src="shadow-logo.png" alt="Quadro 4">
-</div>
-<div class="frame" onclick="showMemory(4)">
-      <img src="floral-shadow.jpg" alt="Quadro 5">
-      <img src="floral-shadow.png" alt="Quadro 5">
-</div>
-<div class="frame" onclick="showMemory(5)">
-<img src="lobo.jpg" alt="Quadro 6">
-</div>
-<div class="frame" onclick="showMemory(6)">
-<img src="Icon girl 🎀.png" alt="Quadro 7">
-</div>
-<div class="frame" onclick="showMemory(7)">
-<img src="baixados.png" alt="Quadro 8">
-</div>
-<div class="frame" onclick="openSecret()">?</div>
-</div>
-<div class="diary-text" id="diary"></div>
-</div>
+<!-- ... [restante do HTML, como os áudios e divs] ... -->
 
 <script>
 const startSound = document.getElementById("start-sound");
@@ -227,95 +41,52 @@ const intro = document.getElementById("intro");
 const loading = document.getElementById("loading");
 const memory = document.getElementById("memory");
 const diary = document.getElementById("diary");
+const audioBtn = document.getElementById("audioBtn");
 
 document.getElementById("startBtn").addEventListener("click", async () => {
-await startSound.play();
-enterFullscreen();
-intro.classList.add("hidden");
-setTimeout(() => {
-intro.style.display = "none";
-loading.style.display = "flex";
-loading.classList.remove("hidden");
-setTimeout(() => {
-loading.classList.add("hidden");
-setTimeout(() => {
-loading.style.display = "none";
-memory.style.display = "flex";
-memory.classList.remove("hidden");
-bgMusic.volume = 0.4;
-bgMusic.play();
-}, 1000);
-}, 3000);
-}, 1000);
+  await startSound.play();
+  enterFullscreen();
+  intro.classList.add("hidden");
+  setTimeout(() => {
+    intro.style.display = "none";
+    loading.style.display = "flex";
+    loading.classList.remove("hidden");
+    setTimeout(() => {
+      loading.classList.add("hidden");
+      setTimeout(() => {
+        loading.style.display = "none";
+        memory.style.display = "flex";
+        memory.classList.remove("hidden");
+        bgMusic.volume = 0.4;
+        bgMusic.play();
+        audioBtn.innerText = "🔊 Música";
+      }, 1000);
+    }, 3000);
+  }, 1000);
 });
 
 function enterFullscreen() {
-const elem = document.documentElement;
-if (elem.requestFullscreen) {
-elem.requestFullscreen();
-} else if (elem.webkitRequestFullscreen) {
-elem.webkitRequestFullscreen();
-} else if (elem.msRequestFullscreen) {
-elem.msRequestFullscreen();
-}
-}
-
-const texts = [
-"Você é minha raridade bonita, como aquele primeiro beijo que mudou tudo — aguardado, doce, real. Nunca mais fui o mesmo.",
-"Quando te peguei no colo no elevador, senti que poderia segurar o mundo... porque o meu mundo é você.",
-"No terraço, com a cidade ao fundo e você ali — linda demais —, eu soube que estar ao seu lado era o melhor lugar que eu podia estar.",
-"Mesmo longe, mesmo que tudo fique contra, nada me afasta de você. Te amar é resistir com carinho e coragem.",
-"Aquela mordida na língua foi engraçada... mas virou uma das minhas lembranças favoritas. É assim com você: até o inesperado é especial..",
-"Sábado foi mágico. Seu sorriso, sua presença, tudo em você fez o tempo parar. E eu só queria viver ali pra sempre.",
-"Entre o caos do mundo e as diferenças que nos cercam, eu escolho você. Todos os dias. Sempre.",
-"Esse quadro... é nosso segredo. Um portal para tudo que ainda vamos viver.....TE AMO"
-];
-
-function showMemory(index) {
-const frames = document.querySelectorAll('.frame');
-frames.forEach((frame) => frame.classList.remove('active'));
-const selected = frames[index];
-selected.classList.add('active');
-
-diary.innerText = texts[index];
-diary.style.display = "block";
-diary.onclick = () => {
-diary.style.display = "none";
-};
-
-const sound = document.getElementById("sound" + index);
-document.querySelectorAll("audio").forEach(a => {
-if (a !== sound && a !== bgMusic && a !== startSound) a.pause();
-});
-
-if (sound) {
-sound.currentTime = 0;
-sound.play();
-}
+  const elem = document.documentElement;
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) {
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) {
+    elem.msRequestFullscreen();
+  }
 }
 
-function rotateOnce(element) {
-if (!element.classList.contains("rotate-once")) {
-element.classList.add("rotate-once");
-setTimeout(() => {
-element.classList.remove("rotate-once");
-}, 1000);
-}
+function toggleAudio() {
+  if (bgMusic.paused) {
+    bgMusic.play();
+    audioBtn.innerText = "🔊 Música";
+  } else {
+    bgMusic.pause();
+    audioBtn.innerText = "🔇 Música";
+  }
 }
 
-function openSecret() {
-bgMusic.pause();
-const win = window.open('', '_blank');
-win.document.write(`
-   <html><head><title>Segredo</title><style>
-     body { background:black; color:white; display:flex; align-items:center; justify-content:center; height:100vh; font-family: monospace; font-size: 20px; }
-   </style></head><body>
-     <p>Shh... escute com o coração.</p>
-     <audio autoplay><source src="voz.mp3" type="audio/mp3"></audio>
-   </body></html>
- `);
-win.document.close();
-}
+// ... [funções showMemory, rotateOnce, openSecret continuam como antes] ...
 </script>
 </body>
 </html>
