@@ -1,3 +1,174 @@
+
+
+Imagem carregada
+lembra ai macaco
+
+Tu literalmente só precisa SUBSTITUIR tua função openSecret() inteira por essa aqui 😭
+
+function openSecret() {
+
+  bgMusic.pause();
+
+  const win = window.open('', '_blank');
+
+  win.document.write(`
+
+  <!DOCTYPE html>
+
+  <html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Secret</title>
+
+    <style>
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+
+        width: 100vw;
+        height: 100vh;
+
+        background: black;
+
+        overflow: hidden;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        font-family: "Yu Mincho", serif;
+
+        color: white;
+
+      }
+
+      .overlay {
+
+        position: absolute;
+
+        inset: 0;
+
+        background:
+        radial-gradient(
+        circle at center,
+        rgba(255,255,255,0.03),
+        transparent 70%);
+
+        animation: pulse 6s infinite alternate;
+
+      }
+
+      .text {
+
+        position: relative;
+
+        font-size: 32px;
+
+        text-align: center;
+
+        line-height: 2;
+
+        opacity: 1;
+
+        transition: opacity 1s ease;
+
+        text-shadow:
+        0 0 10px rgba(255,255,255,0.25),
+        0 0 20px rgba(255,255,255,0.1);
+
+        padding: 20px;
+
+      }
+
+      @keyframes pulse {
+
+        from {
+          opacity: 0.3;
+        }
+
+        to {
+          opacity: 1;
+        }
+
+      }
+
+    </style>
+
+  </head>
+
+  <body>
+
+    <div class="overlay"></div>
+
+    <div class="text" id="secretText"></div>
+
+    <script>
+
+      const phrases = [
+
+        "君に会う前の自分には、<br>もう戻れない気がする。",
+
+        "Before you,<br>I was someone else.",
+
+        "Antes de você,<br>eu era outra pessoa.",
+
+        "Antes de conocerte,<br>yo era alguien diferente.",
+
+        "너를 만나기 전의 나는,<br>이제 기억도 안 나.",
+
+        "Avant toi,<br>j'étais quelqu'un d'autre."
+
+      ];
+
+      let current = 0;
+
+      const text = document.getElementById("secretText");
+
+      function changeText() {
+
+        text.style.opacity = 0;
+
+        setTimeout(() => {
+
+          text.innerHTML = phrases[current];
+
+          text.style.opacity = 1;
+
+          current = (current + 1) % phrases.length;
+
+        }, 1000);
+
+      }
+
+      changeText();
+
+      setInterval(changeText, 4000);
+
+    </script>
+
+  </body>
+
+  </html>
+
+  `);
+
+  win.document.close();
+
+}
+Aí acabou 😭
+não precisa mudar MAIS NADA no site inteiro.
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -548,7 +719,7 @@ function openSecret() {
 
   const win = window.open('', '_blank');
 
-  win.document.write(`
+  win.document.write(
 
     <!DOCTYPE html>
 
@@ -688,7 +859,7 @@ function openSecret() {
 
     </html>
 
-  `);
+  );
 
   win.document.close();
 
@@ -718,3 +889,976 @@ toggleBtn.addEventListener("click", () => {
 
 </body>
 </html>
+
+
+muda tudo ai
+
+Troca tua função openSecret() inteira por ESSA aqui.
+Ela já vem:
+
+com troca automática de idiomas
+
+fade suave
+
+visual mais limpo
+
+sem texto fixo
+
+mais vibe “final secreto de jogo”
+
+/* SECRET */
+
+function openSecret() {
+
+  bgMusic.pause();
+
+  const win = window.open('', '_blank');
+
+  win.document.write(`
+
+    <!DOCTYPE html>
+
+    <html lang="en">
+
+    <head>
+
+      <meta charset="UTF-8">
+
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <title>Secret</title>
+
+      <style>
+
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        body {
+
+          width: 100vw;
+          height: 100vh;
+
+          background: black;
+
+          overflow: hidden;
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          font-family: "Yu Mincho", serif;
+
+          color: white;
+
+        }
+
+        .overlay {
+
+          position: absolute;
+
+          inset: 0;
+
+          background:
+          radial-gradient(
+          circle at center,
+          rgba(255,255,255,0.04),
+          transparent 70%);
+
+          animation: pulse 6s infinite alternate;
+
+        }
+
+        .text {
+
+          position: relative;
+
+          width: 90%;
+
+          font-size: 34px;
+
+          text-align: center;
+
+          line-height: 2;
+
+          opacity: 1;
+
+          transition: opacity 1s ease;
+
+          text-shadow:
+          0 0 10px rgba(255,255,255,0.25),
+          0 0 20px rgba(255,255,255,0.1);
+
+          padding: 20px;
+
+        }
+
+        .sub {
+
+          margin-top: 25px;
+
+          font-size: 11px;
+
+          opacity: 0.4;
+
+          letter-spacing: 4px;
+
+          font-family: monospace;
+
+        }
+
+        @keyframes pulse {
+
+          from {
+            opacity: 0.3;
+          }
+
+          to {
+            opacity: 1;
+          }
+
+        }
+
+      </style>
+
+    </head>
+
+    <body>
+
+      <div class="overlay"></div>
+
+      <div class="text" id="secretText"></div>
+
+      <script>
+
+        const phrases = [
+
+          "君に会う前の自分には、<br>もう戻れない気がする。",
+
+          "Before you,<br>I was someone else.",
+
+          "Antes de você,<br>eu era outra pessoa.",
+
+          "Antes de conocerte,<br>yo era alguien diferente.",
+
+          "너를 만나기 전의 나는,<br>이제 기억도 안 나.",
+
+          "Avant toi,<br>j'étais quelqu'un d'autre.",
+
+          "Depois de você,<br>acho que nada ficou igual.",
+
+          "Você apareceu tarde.<br>Mas apareceu na hora certa."
+
+        ];
+
+        let current = 0;
+
+        const text = document.getElementById("secretText");
+
+        function changeText() {
+
+          text.style.opacity = 0;
+
+          setTimeout(() => {
+
+            text.innerHTML = \`
+              \${phrases[current]}
+              <div class="sub">
+                press start to continue
+              </div>
+            \`;
+
+            text.style.opacity = 1;
+
+            current = (current + 1) % phrases.length;
+
+          }, 1000);
+
+        }
+
+        changeText();
+
+        setInterval(changeText, 4500);
+
+      <\/script>
+
+    </body>
+
+    </html>
+
+  `);
+
+  win.document.close();
+
+}
+
+n mano. ediota o Index INTEIRO
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no" />
+
+  <title>Press Start, Gab</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+        rel="stylesheet" />
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: black;
+      color: white;
+      font-family: 'Press Start 2P', cursive;
+      overflow: hidden;
+    }
+
+    /* INTRO */
+
+    .video-container,
+    .loading-screen,
+    .memory-room {
+
+      width: 100vw;
+      height: 100vh;
+
+      position: absolute;
+      inset: 0;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      transition: opacity 1s ease;
+    }
+
+    .hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .video-container video {
+      width: auto;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .birthday-text {
+
+      position: absolute;
+
+      top: 20%;
+      left: 50%;
+
+      transform: translate(-50%, -50%);
+
+      text-align: center;
+
+      line-height: 1.8;
+
+      font-size: 24px;
+
+      color: #ff66b2;
+
+      text-shadow:
+      0 0 10px #ff66b2,
+      0 0 20px #ff1493;
+
+      animation: glow 1.5s infinite alternate;
+
+    }
+
+    @keyframes glow {
+
+      from {
+        text-shadow:
+        0 0 10px #ff66b2,
+        0 0 20px #ff1493;
+      }
+
+      to {
+        text-shadow:
+        0 0 20px #ff66b2,
+        0 0 30px #ff1493;
+      }
+
+    }
+
+    .press-start {
+
+      position: absolute;
+
+      top: 50%;
+      left: 50%;
+
+      transform: translate(-50%, -50%);
+
+      animation: blink 1s infinite;
+
+      cursor: pointer;
+
+      font-size: 20px;
+
+    }
+
+    @keyframes blink {
+
+      0%,100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
+
+    }
+
+    /* LOADING */
+
+    .loading-screen {
+      display: none;
+    }
+
+    .loading-text {
+
+      display: flex;
+      align-items: center;
+      gap: 15px;
+
+      font-size: 18px;
+
+    }
+
+    .loading-text img {
+      width: 50px;
+    }
+
+    /* MEMORY ROOM */
+
+    .memory-room {
+
+      display: none;
+
+      background:
+      url("0k6meqvps4h91.gif")
+      center/cover no-repeat;
+
+      padding: 20px;
+
+      gap: 25px;
+
+    }
+
+    .carousel {
+
+      width: 90vw;
+
+      display: flex;
+
+      overflow-x: auto;
+
+      gap: 15px;
+
+      padding: 10px;
+
+      scroll-snap-type: x mandatory;
+
+      scrollbar-width: none;
+
+    }
+
+    .carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .frame {
+
+      flex: 0 0 auto;
+
+      width: 100px;
+      height: 100px;
+
+      border: 3px solid #ff66b2;
+
+      background: rgba(255,102,178,0.08);
+
+      box-shadow: 0 0 10px #ff66b2;
+
+      scroll-snap-align: center;
+
+      cursor: pointer;
+
+      overflow: hidden;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      transition: 0.3s;
+
+      animation: float 2s ease-in-out infinite alternate;
+
+      position: relative;
+
+    }
+
+    .frame:hover {
+      transform: scale(1.08);
+    }
+
+    .frame img {
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+    }
+
+    @keyframes float {
+
+      from {
+        transform: translateY(0px);
+      }
+
+      to {
+        transform: translateY(-10px);
+      }
+
+    }
+
+    .frame.active {
+
+      animation: pulse 0.6s ease;
+
+    }
+
+    @keyframes pulse {
+
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.15);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+
+    }
+
+    .diary-text {
+
+      display: none;
+
+      max-width: 90vw;
+
+      text-align: center;
+
+      line-height: 2;
+
+      font-size: 12px;
+
+      background: rgba(255,255,255,0.05);
+
+      backdrop-filter: blur(5px);
+
+      padding: 15px;
+
+      border-radius: 12px;
+
+      box-shadow: 0 0 10px rgba(255,255,255,0.08);
+
+    }
+
+    /* AUDIO BUTTON */
+
+    #audio-toggle {
+
+      position: fixed;
+
+      top: 10px;
+      right: 10px;
+
+      z-index: 999;
+
+      background: none;
+      border: none;
+
+      color: white;
+
+      font-size: 24px;
+
+      cursor: pointer;
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- AUDIO -->
+
+  <button id="audio-toggle">🔊</button>
+
+  <audio id="start-sound" src="Soundstart.m4a"></audio>
+
+  <audio id="bg-music" src="musica-especial.mp3" loop></audio>
+
+  <audio id="sound0" src="sounds/jojo.mp3"></audio>
+  <audio id="sound1" src="sounds/berserk.mp3"></audio>
+  <audio id="sound2" src="sounds/valkyrie.mp3"></audio>
+  <audio id="sound3" src="sounds/luta.mp3"></audio>
+  <audio id="sound4" src="sounds/terror.mp3"></audio>
+  <audio id="sound5" src="sounds/gorillaz.mp3"></audio>
+  <audio id="sound6" src="sounds/abba.mp3"></audio>
+  <audio id="sound7" src="sounds/segredo.mp3"></audio>
+
+  <!-- INTRO -->
+
+  <div class="video-container" id="intro">
+
+    <video autoplay loop muted playsinline>
+      <source src="Smoking Girl from va-11 hall-a.mp4"
+              type="video/mp4">
+    </video>
+
+    <h1 class="birthday-text">
+      Gab,<br>
+      a única coisa<br>
+      que vem na minha mente<br>
+      nos últimos dias.
+    </h1>
+
+    <h1 class="press-start" id="startBtn">
+      Press Start
+    </h1>
+
+  </div>
+
+  <!-- LOADING -->
+
+  <div class="loading-screen" id="loading">
+
+    <div class="loading-text">
+
+      <img src="Human_walk_03.gif">
+
+      Carregando...
+
+    </div>
+
+  </div>
+
+  <!-- MEMORY ROOM -->
+
+  <div class="memory-room" id="memory">
+
+    <div class="carousel">
+
+      <div class="frame"
+           onclick="showMemory(0)">
+        <img src="artworks-000505096608-016bv4-t500x500.jpg">
+      </div>
+
+      <div class="frame"
+           onclick="showMemory(1)">
+        <img src="jojo-pixel.png">
+      </div>
+
+      <div class="frame"
+           onclick="showMemory(2)">
+        <img src="i-love-you.png">
+      </div>
+
+      <div class="frame"
+           onclick="showMemory(3)">
+        <img src="shadow-logo.png">
+      </div>
+
+      <div class="frame"
+           onclick="showMemory(4)">
+        <img src="floral-shadow.png">
+      </div>
+
+      <div class="frame"
+           onclick="showMemory(5)">
+        <img src="lobo.jpg">
+      </div>
+
+      <div class="frame"
+           onclick="showMemory(6)">
+        <img src="Icon girl 🎀.png">
+      </div>
+
+      <div class="frame"
+           onclick="showMemory(7)">
+        <img src="baixados.png">
+      </div>
+
+      <div class="frame"
+           onclick="openSecret()">
+        ?
+      </div>
+
+    </div>
+
+    <div class="diary-text" id="diary"></div>
+
+  </div>
+
+  <script>
+
+    const startSound = document.getElementById("start-sound");
+
+    const bgMusic = document.getElementById("bg-music");
+
+    const intro = document.getElementById("intro");
+
+    const loading = document.getElementById("loading");
+
+    const memory = document.getElementById("memory");
+
+    const diary = document.getElementById("diary");
+
+    const toggleBtn = document.getElementById("audio-toggle");
+
+    /* START */
+
+    document.getElementById("startBtn")
+    .addEventListener("click", async () => {
+
+      await startSound.play();
+
+      document.documentElement.requestFullscreen?.();
+
+      intro.classList.add("hidden");
+
+      setTimeout(() => {
+
+        intro.style.display = "none";
+
+        loading.style.display = "flex";
+
+        setTimeout(() => {
+
+          loading.classList.add("hidden");
+
+          setTimeout(() => {
+
+            loading.style.display = "none";
+
+            memory.style.display = "flex";
+
+            bgMusic.volume = 0.4;
+
+            bgMusic.play();
+
+          }, 1000);
+
+        }, 3000);
+
+      }, 1000);
+
+    });
+
+    /* TEXTS */
+
+    const texts = [
+
+      "Queria ter te encontrado antes. Mas talvez a graça tenha sido você aparecer exatamente agora.",
+
+      "É meio cruel como alguém pode estar tão longe e ainda assim ocupar tanto espaço aqui.",
+
+      "Às vezes eu fico encarando suas fotos tentando entender como alguém pode ser tão linda naturalmente.",
+
+      "Talvez a melhor parte dos meus dias tenha começado a envolver você.",
+
+      "Você tem o tipo de sorriso que realmente consegue mudar meu humor.",
+
+      "Você tá sempre aparecendo nos meus sonhos e pensamentos... às vezes com roupa, às vezes sem.",
+
+      "Ainda é cedo. Mas eu gosto muito do efeito que você tá causando em mim.",
+
+      "Esse quadro é nosso segredo."
+
+    ];
+
+    /* MEMORY */
+
+    function showMemory(index) {
+
+      const frames = document.querySelectorAll(".frame");
+
+      frames.forEach(frame => {
+        frame.classList.remove("active");
+      });
+
+      frames[index].classList.add("active");
+
+      diary.innerText = texts[index];
+
+      diary.style.display = "block";
+
+      diary.onclick = () => {
+        diary.style.display = "none";
+      };
+
+      const sound = document.getElementById("sound" + index);
+
+      document.querySelectorAll("audio").forEach(a => {
+
+        if (
+          a !== sound &&
+          a !== bgMusic &&
+          a !== startSound
+        ) {
+          a.pause();
+        }
+
+      });
+
+      if (sound) {
+
+        sound.currentTime = 0;
+
+        sound.play();
+
+      }
+
+    }
+
+    /* SECRET */
+
+    function openSecret() {
+
+      bgMusic.pause();
+
+      const win = window.open('', '_blank');
+
+      win.document.write(`
+
+        <!DOCTYPE html>
+
+        <html lang="en">
+
+        <head>
+
+          <meta charset="UTF-8">
+
+          <meta name="viewport"
+                content="width=device-width, initial-scale=1.0">
+
+          <title>Secret</title>
+
+          <style>
+
+            * {
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
+            }
+
+            body {
+
+              width: 100vw;
+              height: 100vh;
+
+              background: black;
+
+              overflow: hidden;
+
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              font-family: "Yu Mincho", serif;
+
+              color: white;
+
+            }
+
+            .overlay {
+
+              position: absolute;
+
+              inset: 0;
+
+              background:
+              radial-gradient(
+              circle at center,
+              rgba(255,255,255,0.04),
+              transparent 70%);
+
+              animation: pulse 6s infinite alternate;
+
+            }
+
+            .text {
+
+              position: relative;
+
+              width: 90%;
+
+              font-size: 34px;
+
+              text-align: center;
+
+              line-height: 2;
+
+              opacity: 1;
+
+              transition: opacity 1s ease;
+
+              text-shadow:
+              0 0 10px rgba(255,255,255,0.25),
+              0 0 20px rgba(255,255,255,0.1);
+
+              padding: 20px;
+
+            }
+
+            .sub {
+
+              margin-top: 25px;
+
+              font-size: 11px;
+
+              opacity: 0.4;
+
+              letter-spacing: 4px;
+
+              font-family: monospace;
+
+            }
+
+            @keyframes pulse {
+
+              from {
+                opacity: 0.3;
+              }
+
+              to {
+                opacity: 1;
+              }
+
+            }
+
+          </style>
+
+        </head>
+
+        <body>
+
+          <div class="overlay"></div>
+
+          <div class="text" id="secretText"></div>
+
+          <script>
+
+            const phrases = [
+
+              "君に会う前の自分には、<br>もう戻れない気がする。",
+
+              "Before you,<br>I was someone else.",
+
+              "Antes de você,<br>eu era outra pessoa.",
+
+              "Antes de conocerte,<br>yo era alguien diferente.",
+
+              "너를 만나기 전의 나는,<br>이제 기억도 안 나.",
+
+              "Avant toi,<br>j'étais quelqu'un d'autre.",
+
+              "Depois de você,<br>acho que nada ficou igual.",
+
+              "Você apareceu tarde.<br>Mas apareceu na hora certa."
+
+            ];
+
+            let current = 0;
+
+            const text =
+            document.getElementById("secretText");
+
+            function changeText() {
+
+              text.style.opacity = 0;
+
+              setTimeout(() => {
+
+                text.innerHTML = \`
+                  \${phrases[current]}
+
+                  <div class="sub">
+                    press start to continue
+                  </div>
+                \`;
+
+                text.style.opacity = 1;
+
+                current =
+                (current + 1) % phrases.length;
+
+              }, 1000);
+
+            }
+
+            changeText();
+
+            setInterval(changeText, 4500);
+
+          <\/script>
+
+        </body>
+
+        </html>
+
+      `);
+
+      win.document.close();
+
+    }
+
+    /* AUDIO BUTTON */
+
+    toggleBtn.addEventListener("click", () => {
+
+      if (bgMusic.paused) {
+
+        bgMusic.play();
+
+        toggleBtn.textContent = "🔊";
+
+      } else {
+
+        bgMusic.pause();
+
+        toggleBtn.textContent = "🔇";
+
+      }
+
+    });
+
+  </script>
+
+</body>
+
+</html>
+
