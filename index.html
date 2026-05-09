@@ -3,10 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-<title>Birthday Project</title>
+
+<title>Press Start, Gab</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+
 <style>
-/* [Estilos principais] */
+
 body {
   background-color: black;
   color: white;
@@ -15,16 +18,23 @@ body {
   overflow: hidden;
 }
 
-.video-container, .loading-screen, .memory-room {
+/* INTRO */
+
+.video-container,
+.loading-screen,
+.memory-room {
   width: 100vw;
   height: 100vh;
+
   position: absolute;
   top: 0;
   left: 0;
+
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
   transition: opacity 1s ease-in-out;
 }
 
@@ -41,23 +51,38 @@ body {
 
 .birthday-text {
   position: absolute;
+
   top: 20%;
   left: 50%;
+
   transform: translate(-50%, -50%);
+
   font-size: 24px;
+  line-height: 1.8;
+
   color: #ff66b2;
-  text-shadow: 0 0 10px #ff66b2, 0 0 20px #ff1493;
+
+  text-shadow:
+  0 0 10px #ff66b2,
+  0 0 20px #ff1493;
+
   animation: glow 1.5s infinite alternate;
+
   text-align: center;
 }
 
 .press-start {
   position: absolute;
+
   top: 50%;
   left: 50%;
+
   transform: translate(-50%, -50%);
+
   font-size: 20px;
+
   animation: blink 1s infinite;
+
   cursor: pointer;
 }
 
@@ -67,9 +92,20 @@ body {
 }
 
 @keyframes glow {
-  0% { text-shadow: 0 0 10px #ff66b2, 0 0 20px #ff1493; }
-  100% { text-shadow: 0 0 20px #ff66b2, 0 0 30px #ff1493; }
+  0% {
+    text-shadow:
+    0 0 10px #ff66b2,
+    0 0 20px #ff1493;
+  }
+
+  100% {
+    text-shadow:
+    0 0 20px #ff66b2,
+    0 0 30px #ff1493;
+  }
 }
+
+/* LOADING */
 
 .loading-screen {
   display: none;
@@ -77,6 +113,7 @@ body {
 
 .loading-text {
   font-size: 20px;
+
   display: flex;
   align-items: center;
   gap: 10px;
@@ -86,49 +123,80 @@ body {
   width: 50px;
 }
 
+/* MEMORY ROOM */
+
 .memory-room {
   display: none;
-  background: url("0k6meqvps4h91.gif") center/cover no-repeat;
+
+  background:
+  url("0k6meqvps4h91.gif")
+  center/cover no-repeat;
+
   flex-direction: column;
+
   align-items: center;
   justify-content: center;
+
   padding: 20px;
   gap: 20px;
 }
 
 .carousel {
   display: flex;
+
   overflow-x: scroll;
+
   gap: 15px;
+
   padding: 10px;
+
   scroll-snap-type: x mandatory;
+
   width: 90vw;
+
   cursor: grab;
+
   -webkit-overflow-scrolling: touch;
+
   scrollbar-width: none;
 }
+
 .carousel::-webkit-scrollbar {
   display: none;
 }
 
 .frame {
   flex: 0 0 auto;
+
   scroll-snap-align: center;
+
   width: 100px;
   height: 100px;
+
   background: rgba(255, 102, 178, 0.1);
+
   border: 3px solid #ff66b2;
+
   box-shadow: 0 0 10px #ff66b2;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   cursor: pointer;
+
   font-size: 24px;
+
   transition: transform 0.3s;
+
   animation: float 2s ease-in-out infinite alternate;
+
   user-select: none;
+
   color: white;
+
   text-shadow: 0 0 10px #ff66b2;
+
   position: relative;
 }
 
@@ -138,24 +206,35 @@ body {
   object-fit: cover;
 }
 
+.frame:hover {
+  transform: scale(1.1);
+}
+
 @keyframes float {
   0% { transform: translateY(0); }
   100% { transform: translateY(-10px); }
 }
 
-.frame:hover {
-  transform: scale(1.1);
-}
-
 .diary-text {
   display: none;
+
   color: white;
+
   text-align: center;
+
   font-size: 12px;
+  line-height: 2;
+
   max-width: 90vw;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.05);
+
+  padding: 15px;
+
+  background: rgba(255,255,255,0.05);
+
+  backdrop-filter: blur(5px);
+
   border-radius: 10px;
+
   box-shadow: 0 0 10px #fff2;
 }
 
@@ -164,42 +243,66 @@ body {
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); box-shadow: 0 0 10px #ff66b2; }
-  50% { transform: scale(1.2); box-shadow: 0 0 20px #ff99cc; }
-  100% { transform: scale(1); box-shadow: 0 0 10px #ff66b2; }
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 10px #ff66b2;
+  }
+
+  50% {
+    transform: scale(1.2);
+    box-shadow: 0 0 20px #ff99cc;
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px #ff66b2;
+  }
 }
 
 @keyframes rotateOnce {
-  0% { transform: rotateY(0); }
-  100% { transform: rotateY(360deg); }
+  0% {
+    transform: rotateY(0);
+  }
+
+  100% {
+    transform: rotateY(360deg);
+  }
 }
 
 .rotate-once {
   animation: rotateOnce 1s linear;
 }
 
-/* Botão de áudio */
+/* AUDIO BUTTON */
+
 #audio-toggle {
   position: fixed;
+
   top: 10px;
   right: 10px;
+
   z-index: 1000;
+
   font-size: 24px;
+
   background: none;
   border: none;
+
   color: white;
+
   cursor: pointer;
 }
+
 </style>
 </head>
+
 <body>
-<!-- Botão de áudio -->
+
 <button id="audio-toggle">🔊</button>
 
 <audio id="start-sound" src="Soundstart.m4a"></audio>
 <audio id="bg-music" src="musica-especial.mp3" loop></audio>
 
-<!-- Sons dos quadros -->
 <audio id="sound0" src="sounds/jojo.mp3"></audio>
 <audio id="sound1" src="sounds/berserk.mp3"></audio>
 <audio id="sound2" src="sounds/valkyrie.mp3"></audio>
@@ -208,165 +311,410 @@ body {
 <audio id="sound5" src="sounds/gorillaz.mp3"></audio>
 <audio id="sound6" src="sounds/abba.mp3"></audio>
 <audio id="sound7" src="sounds/segredo.mp3"></audio>
-<audio id="sound8" src="voz.mp3"></audio>
+
+<!-- INTRO -->
 
 <div class="video-container" id="intro">
+
   <video autoplay loop muted playsinline>
     <source src="Smoking Girl from va-11 hall-a.mp4" type="video/mp4" />
   </video>
-  <h1 class="birthday-text">Gab<br />
-a única coisa
-que vem na minha mente
-nos últimos dias.</h1>
-  <h1 class="press-start" id="startBtn">Press Start</h1>
+
+  <h1 class="birthday-text">
+    Gab,<br>
+    a única coisa<br>
+    que vem na minha mente<br>
+    nos últimos dias.
+  </h1>
+
+  <h1 class="press-start" id="startBtn">
+    Press Start
+  </h1>
+
 </div>
+
+<!-- LOADING -->
 
 <div class="loading-screen" id="loading">
+
   <div class="loading-text">
-    <img src="Human_walk_03.gif" alt="Loading" />
+    <img src="Human_walk_03.gif" alt="Loading">
     Carregando...
   </div>
+
 </div>
 
+<!-- MEMORY ROOM -->
+
 <div class="memory-room" id="memory">
+
   <div class="carousel" id="carousel">
+
     <div class="frame" onclick="rotateOnce(this); showMemory(0)">
-      <img src="artworks-000505096608-016bv4-t500x500.jpg" alt="Quadro 1">
+      <img src="artworks-000505096608-016bv4-t500x500.jpg">
     </div>
+
     <div class="frame" onclick="showMemory(1)">
-      <img src="jojo-pixel.png" alt="Quadro 2">
+      <img src="jojo-pixel.png">
     </div>
+
     <div class="frame" onclick="showMemory(2)">
-      <img src="i-love-you.png" alt="Quadro 3">
+      <img src="i-love-you.png">
     </div>
+
     <div class="frame" onclick="showMemory(3)">
-      <img src="shadow-logo.png" alt="Quadro 4">
+      <img src="shadow-logo.png">
     </div>
+
     <div class="frame" onclick="showMemory(4)">
-      <img src="floral-shadow.png" alt="Quadro 5">
+      <img src="floral-shadow.png">
     </div>
+
     <div class="frame" onclick="showMemory(5)">
-      <img src="lobo.jpg" alt="Quadro 6">
+      <img src="lobo.jpg">
     </div>
+
     <div class="frame" onclick="showMemory(6)">
-      <img src="Icon girl 🎀.png" alt="Quadro 7">
+      <img src="Icon girl 🎀.png">
     </div>
+
     <div class="frame" onclick="showMemory(7)">
-      <img src="baixados.png" alt="Quadro 8">
+      <img src="baixados.png">
     </div>
-    <div class="frame" onclick="openSecret()">?</div>
+
+    <div class="frame" onclick="openSecret()">
+      ?
+    </div>
+
   </div>
+
   <div class="diary-text" id="diary"></div>
+
 </div>
 
 <script>
+
 const startSound = document.getElementById("start-sound");
 const bgMusic = document.getElementById("bg-music");
+
 const intro = document.getElementById("intro");
 const loading = document.getElementById("loading");
 const memory = document.getElementById("memory");
+
 const diary = document.getElementById("diary");
+
 const toggleBtn = document.getElementById("audio-toggle");
 
+/* START */
+
 document.getElementById("startBtn").addEventListener("click", async () => {
+
   await startSound.play();
+
   enterFullscreen();
+
   intro.classList.add("hidden");
+
   setTimeout(() => {
+
     intro.style.display = "none";
+
     loading.style.display = "flex";
+
     loading.classList.remove("hidden");
+
     setTimeout(() => {
+
       loading.classList.add("hidden");
+
       setTimeout(() => {
+
         loading.style.display = "none";
+
         memory.style.display = "flex";
+
         memory.classList.remove("hidden");
+
         bgMusic.volume = 0.4;
+
         bgMusic.play();
+
       }, 1000);
+
     }, 3000);
+
   }, 1000);
+
 });
 
+/* FULLSCREEN */
+
 function enterFullscreen() {
+
   const elem = document.documentElement;
+
   if (elem.requestFullscreen) {
     elem.requestFullscreen();
-  } else if (elem.webkitRequestFullscreen) {
-    elem.webkitRequestFullscreen();
-  } else if (elem.msRequestFullscreen) {
-    elem.msRequestFullscreen();
   }
+
 }
 
+/* TEXTS */
+
 const texts = [
-  "Queria ter te encontrado antes.Mas talvez a graça tenha sido você aparecer exatamente agora..",
-  "É meio cruel como alguém pode estar tão longe e ainda assim ocupar tanto espaço aqui..",
-  "Às vezes eu fico encarando suas fotos tentando entender como alguém pode ser tão linda naturalmente..",
-  "Talvez a melhor parte dos meus dias tenha começado a envolver você..",
-  "Você tem o tipo de sorriso que realmente consegue mudar meu humor..",
-  "Você tá sempre aparecendo nos meus sonhos e pensamentos as vezes com e as vezes sem roupa",
-  "Entre o caos do mundo e as diferenças que nos cercam, eu escolho você. Todos os dias. Sempre.",
-  "Esse quadro... é nosso segredo. Um portal para tudo que ainda vamos viver..... BEIJOS"
+
+"Queria ter te encontrado antes. Mas talvez a graça tenha sido você aparecer exatamente agora.",
+
+"É meio cruel como alguém pode estar tão longe e ainda assim ocupar tanto espaço aqui.",
+
+"Às vezes eu fico encarando suas fotos tentando entender como alguém pode ser tão linda naturalmente.",
+
+"Talvez a melhor parte dos meus dias tenha começado a envolver você.",
+
+"Você tem o tipo de sorriso que realmente consegue mudar meu humor.",
+
+"Você tá sempre aparecendo nos meus sonhos e pensamentos... às vezes com roupa, às vezes sem.",
+
+"Ainda é cedo. Mas eu gosto muito do efeito que você tá causando em mim.",
+
+"Esse quadro é nosso segredo."
+
 ];
 
+/* SHOW MEMORY */
+
 function showMemory(index) {
+
   const frames = document.querySelectorAll('.frame');
-  frames.forEach((frame) => frame.classList.remove('active'));
+
+  frames.forEach((frame) => {
+    frame.classList.remove('active');
+  });
+
   const selected = frames[index];
+
   selected.classList.add('active');
 
   diary.innerText = texts[index];
+
   diary.style.display = "block";
+
   diary.onclick = () => {
     diary.style.display = "none";
   };
 
   const sound = document.getElementById("sound" + index);
+
   document.querySelectorAll("audio").forEach(a => {
-    if (a !== sound && a !== bgMusic && a !== startSound) a.pause();
+
+    if (
+      a !== sound &&
+      a !== bgMusic &&
+      a !== startSound
+    ) {
+      a.pause();
+    }
+
   });
 
   if (sound) {
     sound.currentTime = 0;
     sound.play();
   }
+
 }
 
+/* ROTATE */
+
 function rotateOnce(element) {
+
   if (!element.classList.contains("rotate-once")) {
+
     element.classList.add("rotate-once");
+
     setTimeout(() => {
       element.classList.remove("rotate-once");
     }, 1000);
+
   }
+
 }
+
+/* SECRET */
 
 function openSecret() {
+
   bgMusic.pause();
+
   const win = window.open('', '_blank');
+
   win.document.write(`
-    <html><head><title>Segredo</title><style>
-      body { background:black; color:white; display:flex; align-items:center; justify-content:center; height:100vh; font-family: monospace; font-size: 20px; }
-    </style></head><body>
-      <p>Shh... escute com o coração.</p>
-      <audio autoplay controls><source src="voz.mp3" type="audio/mp3"></audio>
-    </body></html>
+
+    <!DOCTYPE html>
+
+    <html lang="ja">
+
+    <head>
+
+      <meta charset="UTF-8">
+
+      <title>Secret</title>
+
+      <style>
+
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        body {
+
+          width: 100vw;
+          height: 100vh;
+
+          background: black;
+
+          overflow: hidden;
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          font-family: "Yu Mincho", serif;
+
+          color: white;
+
+        }
+
+        .overlay {
+
+          position: absolute;
+
+          inset: 0;
+
+          background:
+          radial-gradient(
+          circle at center,
+          rgba(255,255,255,0.03),
+          transparent 70%);
+
+          animation: pulse 6s infinite alternate;
+
+        }
+
+        .text {
+
+          position: relative;
+
+          font-size: 32px;
+
+          text-align: center;
+
+          line-height: 2;
+
+          opacity: 0;
+
+          text-shadow:
+          0 0 10px rgba(255,255,255,0.25),
+          0 0 20px rgba(255,255,255,0.1);
+
+          animation: fadeIn 3s ease forwards;
+
+          padding: 20px;
+
+        }
+
+        .sub {
+
+          margin-top: 20px;
+
+          font-size: 12px;
+
+          opacity: 0.5;
+
+          letter-spacing: 3px;
+
+          animation: fadeIn 5s ease forwards;
+
+        }
+
+        @keyframes fadeIn {
+
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+
+        }
+
+        @keyframes pulse {
+
+          from {
+            opacity: 0.3;
+          }
+
+          to {
+            opacity: 1;
+          }
+
+        }
+
+      </style>
+
+    </head>
+
+    <body>
+
+      <div class="overlay"></div>
+
+      <div class="text">
+
+        君に会う前の自分には、<br>
+        もう戻れない気がする。
+
+        <div class="sub">
+          before you, i was someone else
+        </div>
+
+      </div>
+
+    </body>
+
+    </html>
+
   `);
+
   win.document.close();
+
 }
 
-// Botão de alternar música de fundo
+/* AUDIO BUTTON */
+
 toggleBtn.addEventListener("click", () => {
+
   if (bgMusic.paused) {
+
     bgMusic.play();
+
     toggleBtn.textContent = "🔊";
+
   } else {
+
     bgMusic.pause();
+
     toggleBtn.textContent = "🔇";
+
   }
+
 });
+
 </script>
+
 </body>
 </html>
